@@ -104,14 +104,15 @@ function Admin() {
         <table className="fl-table">
           <thead>
             <tr>
-              <th style={{ width: "2%" }}>#</th>
-              <th style={{ width: "10%" }}>Agent</th>
-              <th style={{ width: "15%" }}>Date</th>
-              <th style={{ width: "25%" }}>Name</th>
-              <th style={{ width: "20%" }}>Telephone</th>
-              <th style={{ width: "30%" }}>Address</th>
-              <th style={{ width: "25%" }}>Date programmation</th>
-              <th style={{ width: "20%" }}>Commercial</th>
+              <th >#</th>
+              <th >Agent</th>
+              <th >Date</th>
+              <th >Name</th>
+              <th >Telephone</th>
+              <th >Address</th>
+              <th >Date programmation</th>
+              <th >Commercial</th>
+              
             </tr>
           </thead>
           <tbody>
