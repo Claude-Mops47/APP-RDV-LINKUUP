@@ -24,8 +24,9 @@ function Home() {
   // console.log(appointments);
 
   useEffect(() => {
-    dispatch(appointmentActions.getAppointment(auth?.id));
-    setRefreshList(false);
+     dispatch(appointmentActions.getAppointment(auth?.id));
+     setRefreshList(false);
+      
   }, [dispatch, auth?.id, refreshList]);
 
   return (
@@ -79,6 +80,14 @@ function Home() {
                 </tr>
               );
             })}
+            {
+                appointments?.loading && 
+                <tr>
+                    <td className="text-center">
+                        <span className="spinner-border spinner-border-lg align-center"></span>
+                    </td>
+                </tr>
+            }
           </tbody>
         </table>
       </div>

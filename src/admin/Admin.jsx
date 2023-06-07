@@ -11,8 +11,6 @@ function Admin() {
   const auth = useSelector((x) => x.auth.value.user);
   const appointments = useSelector((x) => x.appointments.list);
 
-  console.log(appointments);
-
   useEffect(() => {
     dispatch(appointmentActions.getAllAppointments());
   }, []);
@@ -26,7 +24,7 @@ function Admin() {
       </p>
 
       <div className="table-wrapper">
-      <h2>Liste des rendez-vous</h2>
+        <h2>Liste des rendez-vous</h2>
 
         <table className="fl-table">
           <thead>
@@ -58,7 +56,6 @@ function Admin() {
               const dateObj2 = moment(dateCreated);
               const formattedDateCreated = dateObj2.format("DD-MM-YY");
 
-              console.log(dateCreated);
               return (
                 <tr key={item._id}>
                   <td>{index + 1}</td>
@@ -77,6 +74,13 @@ function Admin() {
                 </tr>
               );
             })}
+            {appointments?.loading && (
+              <tr>
+                <td className="center">
+                  <span className="spinner-border spinner-border-lg align-center"></span>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
