@@ -10,6 +10,7 @@ function Admin() {
   const dispatch = useDispatch();
   const auth = useSelector((x) => x.auth.value.user);
   const appointments = useSelector((x) => x.appointments.list);
+  console.log(appointments);
 
   useEffect(() => {
     dispatch(appointmentActions.getAllAppointments());
@@ -104,15 +105,14 @@ function Admin() {
         <table className="fl-table">
           <thead>
             <tr>
-              <th >#</th>
-              <th >Agent</th>
-              <th >Date</th>
-              <th >Name</th>
-              <th >Telephone</th>
-              <th >Address</th>
-              <th >Date programmation</th>
-              <th >Commercial</th>
-              
+              <th>#</th>
+              <th>Agent</th>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Telephone</th>
+              <th>Address</th>
+              <th>Date programmation</th>
+              <th>Commercial</th>
             </tr>
           </thead>
           <tbody>
@@ -129,7 +129,7 @@ function Admin() {
               const dateObj = moment(dateStr);
               const formattedDate = dateObj.format("DD-MM-YY [à] HH:mm");
               // date created
-              const dateCreated = item.posted_by?.createdAt;
+              const dateCreated = item?.createdAt;
               const dateObj2 = moment(dateCreated);
               const formattedDateCreated = dateObj2.format("DD-MMMM");
 
@@ -155,6 +155,13 @@ function Admin() {
               <tr>
                 <td className="center">
                   <span className="spinner-border spinner-border-lg align-center"></span>
+                </td>
+              </tr>
+            )}
+            {appointments?.error && (
+              <tr>
+                <td className="center">
+                  <p style={{ color: "red" }}>Error Network</p>{" "}
                 </td>
               </tr>
             )}

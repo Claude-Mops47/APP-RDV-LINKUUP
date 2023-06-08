@@ -24,9 +24,8 @@ function Home() {
   // console.log(appointments);
 
   useEffect(() => {
-     dispatch(appointmentActions.getAppointment(auth?.id));
-     setRefreshList(false);
-      
+    dispatch(appointmentActions.getAppointment(auth?.id));
+    setRefreshList(false);
   }, [dispatch, auth?.id, refreshList]);
 
   return (
@@ -48,12 +47,13 @@ function Home() {
         <table className="fl-table">
           <thead>
             <tr>
-              <th style={{ width: "3%" }}>#</th>
-              <th style={{ width: "20%" }}>Name</th>
-              <th style={{ width: "20%" }}>Telephone</th>
-              <th style={{ width: "30%" }}>Address</th>
-              <th style={{ width: "20%" }}>Date programmation</th>
-              <th style={{ width: "20%" }}>Commercial</th>
+              <th>#</th>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Telephone</th>
+              <th>Address</th>
+              <th>Date programmation</th>
+              <th>Commercial</th>
             </tr>
           </thead>
           <tbody>
@@ -61,12 +61,18 @@ function Home() {
               const phoneNumbers = Array.isArray(item.phone)
                 ? item.phone.join(" ").split("/")
                 : null;
+                // date pro
               const dateStr = item.date;
               const dateObj = moment(dateStr);
               const formattedDate = dateObj.format("DD-MM-YY [à] HH:mm");
+               // date created
+               const dateCreated = item?.createdAt;
+               const dateObj2 = moment(dateCreated);
+               const formattedDateCreated = dateObj2.format("DD-MMMM");
               return (
                 <tr key={item._id}>
                   <td>{idenx + 1}</td>
+                  <td>{formattedDateCreated}</td>
                   <td>{item.name}</td>
                   <td>
                     {phoneNumbers &&
@@ -80,14 +86,20 @@ function Home() {
                 </tr>
               );
             })}
-            {
-                appointments?.loading && 
-                <tr>
-                    <td className="text-center">
-                        <span className="spinner-border spinner-border-lg align-center"></span>
-                    </td>
-                </tr>
-            }
+            {appointments?.loading && (
+              <tr>
+                <td className="text-center">
+                  <span className="spinner-border spinner-border-lg align-center"></span>
+                </td>
+              </tr>
+            )}
+            {appointments?.error && (
+              <tr>
+                <td className="center">
+                  <p style={{ color: "red" }}>Error Network</p>{" "}
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

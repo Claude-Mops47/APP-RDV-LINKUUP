@@ -61,7 +61,7 @@ const ModalForm = ({ isOpen, onClose }) => {
           <div className="modal-body">
             <form onSubmit={formik.handleSubmit}>
               <div>
-                <label htmlFor="date">Date :</label>
+                <label htmlFor="date">Date de programmation :</label>
                 <DatePicker
                   id="date"
                   name="date"
@@ -83,7 +83,7 @@ const ModalForm = ({ isOpen, onClose }) => {
               </div>
 
               <div>
-                <label htmlFor="nom">Nom :</label>
+                <label htmlFor="nom">Nom du Docteur:</label>
                 <input
                   id="name"
                   name="name"
@@ -116,6 +116,25 @@ const ModalForm = ({ isOpen, onClose }) => {
                 )}
               </div>
 
+              
+
+              <div>
+                <label htmlFor="phone">Téléphone du Docteur:</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.phone}
+                  className="form-control"
+                  autoComplete="false"
+                />
+                {formik.errors.phone && formik.touched.phone && (
+                  <div>{formik.errors.phone}</div>
+                )}
+              </div>
+
               <div>
                 <label htmlFor="commercial">Commercial :</label>
                 <input
@@ -130,23 +149,6 @@ const ModalForm = ({ isOpen, onClose }) => {
                 />
                 {formik.errors.commercial && formik.touched.commercial && (
                   <div>{formik.errors.commercial}</div>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="phone">Téléphone :</label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.phone}
-                  className="form-control"
-                  autoComplete="false"
-                />
-                {formik.errors.phone && formik.touched.phone && (
-                  <div>{formik.errors.phone}</div>
                 )}
               </div>
               <br />
