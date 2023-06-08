@@ -11,7 +11,7 @@ const ModalForm = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
 
   const initialValues = {
-    date: new Date(),
+    date: "",
     name: "",
     address: "",
     commercial: "",
@@ -26,14 +26,11 @@ const ModalForm = ({ isOpen, onClose }) => {
     phone: Yup.string().required("Le numéro de téléphone est requis"),
   });
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     dispatch(alertActions.clear());
     try {
-      let message;
-      dispatch(appointmentActions.createAppointment(values));
-      message = "Appointment added";
-      // console.log(values)
-
+      await dispatch(appointmentActions.createAppointment(values));
+      const message = "Appointment added";
       onClose();
       dispatch(alertActions.success({ message, showAtterRedirect: true }));
     } catch (error) {
@@ -46,6 +43,14 @@ const ModalForm = ({ isOpen, onClose }) => {
     validationSchema,
     onSubmit: handleSubmit,
   });
+
+  const handleChange = (event) => {
+    formik.handleChange(event);
+  };
+
+  const handleBlur = (event) => {
+    formik.handleBlur(event);
+  };
 
   return (
     <div className={`modal ${isOpen ? "open" : ""}`}>
@@ -60,106 +65,108 @@ const ModalForm = ({ isOpen, onClose }) => {
 
           <div className="modal-body">
             <form onSubmit={formik.handleSubmit}>
-            <div className="row"> 
+              <div className="row">
+                <div className="mb-3 col">
+                  <label htmlFor="date">Date de programmation :</label>
+                  <DatePicker
+                    id="date"
+                    name="date"
+                    selected={formik.values.date}
+                    onChange={(date) => formik.setFieldValue("date", date)}
+                    dateFormat="PP à p"
+                    showIcon
+                    showTimeSelect
+                    timeIntervals={30}
+                    timeFormat="HH:mm"
+                    isClearable
+                    locale={fr}
+                    autoComplete="off"
+                    className="form-control"
 
-              <div className="mb-3 col">
-                <label htmlFor="date">Date de programmation :</label>
-                <DatePicker
-                  id="date"
-                  name="date"
-                  selected={formik.values.date}
-                  onChange={(date) => formik.setFieldValue("date", date)}
-                  dateFormat="PP à p"
-                  showIcon
-                  showTimeSelect
-                  timeIntervals={30}
-                  timeFormat="HH:mm"
-                  isClearable
-                  timeCaption="Heure"
-                  locale={fr}
-                  autoComplete="false"
-                />
-                {formik.errors.date && formik.touched.date && (
-                  <div>{formik.errors.date}</div>
-                )}
+                  />
+                  {formik.errors.date && formik.touched.date && (
+                    <div>{formik.errors.date}</div>
+                  )}
+                </div>
+
+                <div className="mb-3 col">
+                  <label htmlFor="nom">Nom Complet:</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={formik.values.name}
+                    className="form-control"
+                    autoComplete="off"
+                  />
+                  {formik.errors.name && formik.touched.name && (
+                    <div>{formik.errors.name}</div>
+                  )}
+                </div>
               </div>
 
-              <div className="mb-3 col">
-                <label htmlFor="nom">Nom du Docteur:</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.name}
-                  className="form-control"
-                  autoComplete="false"
-                />
-                {formik.errors.name && formik.touched.name && (
-                  <div>{formik.errors.name}</div>
-                )}
-              </div>
+              <div className="row">
+                <div className="mb-3 col">
+                  <label htmlFor="phone">Téléphone :</label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={formik.values.phone}
+                    className="form-control"
+                    autoComplete="off"
+                    placeholder="Fixe / Mobile"
+                  />
+                  {formik.errors.phone && formik.touched.phone && (
+                    <div>{formik.errors.phone}</div>
+                  )}
+                </div>
+
+                <div className="mb-3 col">
+                  <label htmlFor="commercial">Commercial :</label>
+                  <select
+                    id="commercial"
+                    name="commercial"
+                    type="text"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={formik.values.commercial}
+                    className="form-control"
+                    autoComplete="off"
+                  >
+                    <option value="">Select Commercial</option>
+                    <option value="Annabelle Rodriguez">
+                      Annabelle Rodriguez
+                    </option>
+                    <option value="Benoît Chamboissier">
+                      Benoît Chamboissier
+                    </option>
+                    <option value="Freddy Tamboers">Freddy Tamboers</option>
+                    <option value="Julien Morel">Julien Morel</option>
+                    <option value="Théo Raymond">Théo Raymond</option>
+                    <option value="Aurore Diaollo">Aurore Diaollo</option>
+                  </select>
+                  {formik.errors.commercial && formik.touched.commercial && (
+                    <div>{formik.errors.commercial}</div>
+                  )}
+                </div>
               </div>
 
-             
-
-              
-              <div className="row"> 
-              <div className="mb-3 col">
-                <label htmlFor="phone">Téléphone du Docteur:</label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.phone}
-                  className="form-control"
-                  autoComplete="false"
-                />
-                {formik.errors.phone && formik.touched.phone && (
-                  <div>{formik.errors.phone}</div>
-                )}
-              </div>
-
-              <div className="mb-3 col">
-                <label htmlFor="commercial">Commercial :</label>
-                <select
-                  id="commercial"
-                  name="commercial"
-                  type="text"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.commercial}
-                  className="form-control"
-                  autoComplete="false"
-                >
-                <option value=''>Select Commercial</option>
-                <option value='Annabelle Rodriguez'>Annabelle Rodriguez</option>
-                <option value='Benoît Chamboissier'>Benoît Chamboissier</option>
-                <option value='Freddy Tamboers'>Freddy Tamboers</option>
-                <option value='Julien Morel'>Julien Morel</option>
-                <option value='Théo Raymond'>Théo Raymond</option>
-                <option value='Aurore Diaollo'>Aurore Diaollo</option>
-                </select>
-                {formik.errors.commercial && formik.touched.commercial && (
-                  <div>{formik.errors.commercial}</div>
-                )}
-              </div>
-
-              </div>
               <div>
                 <label htmlFor="address">Adresse :</label>
                 <input
                   id="address"
                   name="address"
                   type="text"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   value={formik.values.address}
                   className="form-control"
-                  autoComplete="false"
+                  autoComplete="off"
                 />
                 {formik.errors.address && formik.touched.address && (
                   <div>{formik.errors.address}</div>
@@ -167,24 +174,24 @@ const ModalForm = ({ isOpen, onClose }) => {
               </div>
 
               <br />
-            </form>
-          </div>
 
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-outline-primary"
-              onClick={formik.handleSubmit}
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              className="btn btn-outline-secondary"
-              onClick={onClose}
-            >
-              Close
-            </button>
+              <div className="modal-footer">
+                <button
+                  type="submit"
+                  className="btn btn-outline-primary"
+                  onClick={formik.handleSubmit}
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary"
+                  onClick={onClose}
+                >
+                  Close
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

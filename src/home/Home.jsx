@@ -1,15 +1,21 @@
+
 import { useDispatch, useSelector } from "react-redux";
 import ModalForm from "_components/PopupForm";
 import React, { useEffect, useState } from "react";
 import { appointmentActions } from "_store";
 import moment from "moment";
 
-export { Home };
-
 function Home() {
-  // modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [refreshList, setRefreshList] = useState(false);
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth.value.user);
+  const appointments = useSelector((state) => state.appointments.item);
+
+  useEffect(() => {
+    dispatch(appointmentActions.getAppointment(auth?.id));
+    setRefreshList(false);
+  }, [dispatch, auth?.id, refreshList]);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => {
@@ -17,16 +23,54 @@ function Home() {
     setRefreshList(true);
   };
 
-  const dispatch = useDispatch();
-  const auth = useSelector((x) => x.auth.value.user);
-  const appointments = useSelector((x) => x.appointments.item);
+  const renderPhoneNumbers = (phone) => {
+    if (Array.isArray(phone)) {
+      return phone.join(" ").split("/").map((number) => (
+        <div key={number}>{number}</div>
+      ));
+    }
+    return null;
+  };
 
-  // console.log(appointments);
+  const renderAppointments = () => {
+    if (appointments?.loading) {
+      return (
+        <tr>
+          <td className="text-center">
+            <span className="spinner-border spinner-border-lg align-center"></span>
+          </td>
+        </tr>
+      );
+    }
 
-  useEffect(() => {
-    dispatch(appointmentActions.getAppointment(auth?.id));
-    setRefreshList(false);
-  }, [dispatch, auth?.id, refreshList]);
+    if (appointments?.error) {
+      return (
+        <tr>
+          <td className="center">
+            <p style={{ color: "red" }}>Error Network</p>
+          </td>
+        </tr>
+      );
+    }
+
+    return appointments?.value?.map((item, index) => {
+      const phoneNumbers = renderPhoneNumbers(item.phone);
+      const formattedDate = moment(item.date).format("DD-MM-YY [à] HH:mm");
+      const formattedDateCreated = moment(item?.createdAt).format("DD-MMMM");
+
+      return (
+        <tr key={item._id}>
+          <td>{index + 1}</td>
+          <td>{formattedDateCreated}</td>
+          <td>{item.name}</td>
+          <td>{phoneNumbers}</td>
+          <td>{item.address}</td>
+          <td>{formattedDate}</td>
+          <td>{item.commercial}</td>
+        </tr>
+      );
+    });
+  };
 
   return (
     <div>
@@ -57,52 +101,12 @@ function Home() {
             </tr>
           </thead>
           <tbody>
-            {appointments?.value?.map((item, idenx) => {
-              const phoneNumbers = Array.isArray(item.phone)
-                ? item.phone.join(" ").split("/")
-                : null;
-                // date pro
-              const dateStr = item.date;
-              const dateObj = moment(dateStr);
-              const formattedDate = dateObj.format("DD-MM-YY [à] HH:mm");
-               // date created
-               const dateCreated = item?.createdAt;
-               const dateObj2 = moment(dateCreated);
-               const formattedDateCreated = dateObj2.format("DD-MMMM");
-              return (
-                <tr key={item._id}>
-                  <td>{idenx + 1}</td>
-                  <td>{formattedDateCreated}</td>
-                  <td>{item.name}</td>
-                  <td>
-                    {phoneNumbers &&
-                      phoneNumbers.map((number) => (
-                        <div key={number}>{number}</div>
-                      ))}
-                  </td>
-                  <td>{item.address}</td>
-                  <td>{formattedDate}</td>
-                  <td>{item.commercial}</td>
-                </tr>
-              );
-            })}
-            {appointments?.loading && (
-              <tr>
-                <td className="text-center">
-                  <span className="spinner-border spinner-border-lg align-center"></span>
-                </td>
-              </tr>
-            )}
-            {appointments?.error && (
-              <tr>
-                <td className="center">
-                  <p style={{ color: "red" }}>Error Network</p>{" "}
-                </td>
-              </tr>
-            )}
+            {renderAppointments()}
           </tbody>
         </table>
       </div>
     </div>
   );
 }
+
+export { Home };
