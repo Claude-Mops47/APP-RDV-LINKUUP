@@ -104,7 +104,7 @@ function Admin() {
         <h2>Liste des rendez-vous</h2>
 
         <div className="form-group">
-          <label htmlFor="agentFilter">Filtre agent :</label>
+          <label htmlFor="agentFilter">Filtre agent : </label>
           <input
             className="input-control"
             type="text"
