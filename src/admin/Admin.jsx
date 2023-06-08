@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -10,11 +11,11 @@ function Admin() {
   const dispatch = useDispatch();
   const auth = useSelector((x) => x.auth.value.user);
   const appointments = useSelector((x) => x.appointments.list);
-  console.log(appointments);
 
   useEffect(() => {
     dispatch(appointmentActions.getAllAppointments());
   }, []);
+
 
   const downloadAsCSV = () => {
     // Create a CSV string from the appointment data
@@ -58,11 +59,10 @@ function Admin() {
     }
   };
 
-  const [filterAgent, setFilterAgent] = useState("");
 
-  const handleAgentFilterChange = (e) => {
-    setFilterAgent(e.target.value);
-  };
+  const [filterAgent, setFilterAgent] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [appointmentsPerPage] = useState(16);
 
   const filteredAppointments = appointments?.value?.filter((item) => {
     if (
@@ -76,6 +76,29 @@ function Admin() {
     return true;
   });
 
+  const handleAgentFilterChange = (e) => {
+    setFilterAgent(e.target.value);
+  };
+
+  const sortedAppointments = [...(filteredAppointments || [])].sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+    return dateB - dateA;
+  });
+
+  // Pagination
+  const indexOfLastAppointment = currentPage * appointmentsPerPage;
+  const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
+
+  const currentAppointments = sortedAppointments.slice(
+    indexOfFirstAppointment,
+    indexOfLastAppointment
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div>
       <h1>Hi {auth?.firstName}!</h1>
@@ -83,13 +106,13 @@ function Admin() {
       <p>
         <Link to="/users">Manage Users</Link>
       </p>
-
       <button className="btn btn-link" onClick={downloadAsCSV}>
         Download appointment list as CSV
       </button>
 
       <div className="table-wrapper">
         <h2>Liste des rendez-vous</h2>
+
         <div className="form-group">
           <label htmlFor="agentFilter">Filter par agent :</label>
           <input
@@ -116,22 +139,13 @@ function Admin() {
             </tr>
           </thead>
           <tbody>
-            {filteredAppointments?.map((item, index) => {
-              // phone array
-
+            {currentAppointments.map((item, index) => {
               const phoneNumbers = Array.isArray(item.phone)
                 ? item.phone.join(" ").split("/")
                 : null;
-              // agent
               const agent = item.posted_by?.firstName;
-              // date programmation
-              const dateStr = item.date;
-              const dateObj = moment(dateStr);
-              const formattedDate = dateObj.format("DD-MM-YY [à] HH:mm");
-              // date created
-              const dateCreated = item?.createdAt;
-              const dateObj2 = moment(dateCreated);
-              const formattedDateCreated = dateObj2.format("DD-MMMM");
+              const formattedDate = moment(item.date).format("DD-MM-YY [à] HH:mm");
+              const formattedDateCreated = moment(item?.createdAt).format("DD-MMMM");
 
               return (
                 <tr key={item._id}>
@@ -167,7 +181,50 @@ function Admin() {
             )}
           </tbody>
         </table>
+        <Pagination
+          appointmentsPerPage={appointmentsPerPage}
+          totalAppointments={sortedAppointments.length}
+          currentPage={currentPage}
+          paginate={paginate}
+        />
       </div>
     </div>
   );
 }
+
+function Pagination({
+  appointmentsPerPage,
+  totalAppointments,
+  currentPage,
+  paginate,
+}) {
+  const pageNumbers = [];
+
+  for (
+    let i = 1;
+    i <= Math.ceil(totalAppointments / appointmentsPerPage);
+    i++
+  ) {
+    pageNumbers.push(i);
+  }
+
+  return (
+    <nav>
+      <ul className="pagination">
+        {pageNumbers.map((number) => (
+          <li key={number} className="page-item">
+            <button
+              className={`page-link ${number === currentPage ? "active" : ""}`}
+              onClick={() => paginate(number)}
+            >
+              {number}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+
+

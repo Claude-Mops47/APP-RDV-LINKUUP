@@ -60,7 +60,9 @@ const ModalForm = ({ isOpen, onClose }) => {
 
           <div className="modal-body">
             <form onSubmit={formik.handleSubmit}>
-              <div>
+            <div className="row"> 
+
+              <div className="mb-3 col">
                 <label htmlFor="date">Date de programmation :</label>
                 <DatePicker
                   id="date"
@@ -82,7 +84,7 @@ const ModalForm = ({ isOpen, onClose }) => {
                 )}
               </div>
 
-              <div>
+              <div className="mb-3 col">
                 <label htmlFor="nom">Nom du Docteur:</label>
                 <input
                   id="name"
@@ -98,7 +100,55 @@ const ModalForm = ({ isOpen, onClose }) => {
                   <div>{formik.errors.name}</div>
                 )}
               </div>
+              </div>
 
+             
+
+              
+              <div className="row"> 
+              <div className="mb-3 col">
+                <label htmlFor="phone">Téléphone du Docteur:</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.phone}
+                  className="form-control"
+                  autoComplete="false"
+                />
+                {formik.errors.phone && formik.touched.phone && (
+                  <div>{formik.errors.phone}</div>
+                )}
+              </div>
+
+              <div className="mb-3 col">
+                <label htmlFor="commercial">Commercial :</label>
+                <select
+                  id="commercial"
+                  name="commercial"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.commercial}
+                  className="form-control"
+                  autoComplete="false"
+                >
+                <option value=''>Select Commercial</option>
+                <option value='Annabelle Rodriguez'>Annabelle Rodriguez</option>
+                <option value='Benoît Chamboissier'>Benoît Chamboissier</option>
+                <option value='Freddy Tamboers'>Freddy Tamboers</option>
+                <option value='Julien Morel'>Julien Morel</option>
+                <option value='Théo Raymond'>Théo Raymond</option>
+                <option value='Aurore Diaollo'>Aurore Diaollo</option>
+                </select>
+                {formik.errors.commercial && formik.touched.commercial && (
+                  <div>{formik.errors.commercial}</div>
+                )}
+              </div>
+
+              </div>
               <div>
                 <label htmlFor="address">Adresse :</label>
                 <input
@@ -116,41 +166,6 @@ const ModalForm = ({ isOpen, onClose }) => {
                 )}
               </div>
 
-              
-
-              <div>
-                <label htmlFor="phone">Téléphone du Docteur:</label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.phone}
-                  className="form-control"
-                  autoComplete="false"
-                />
-                {formik.errors.phone && formik.touched.phone && (
-                  <div>{formik.errors.phone}</div>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="commercial">Commercial :</label>
-                <input
-                  id="commercial"
-                  name="commercial"
-                  type="text"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.commercial}
-                  className="form-control"
-                  autoComplete="false"
-                />
-                {formik.errors.commercial && formik.touched.commercial && (
-                  <div>{formik.errors.commercial}</div>
-                )}
-              </div>
               <br />
             </form>
           </div>
