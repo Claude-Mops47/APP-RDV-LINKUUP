@@ -54,7 +54,7 @@ function Admin() {
 
   const [filterAgent, setFilterAgent] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const appointmentsPerPage = 16;
+  const appointmentsPerPage = 20;
 
   const filteredAppointments = appointments?.value?.filter((item) => {
     if (
