@@ -23,12 +23,7 @@ function Home() {
     setRefreshList(true);
   };
 
-  const renderPhoneNumbers = (phone) => {
-    if (Array.isArray(phone)) {
-      return phone.join(" / ")
-    }
-    return null;
-  };
+  
 
   const renderAppointments = () => {
     if (appointments?.loading) {
