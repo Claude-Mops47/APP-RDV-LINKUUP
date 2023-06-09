@@ -4,6 +4,7 @@ import ModalForm from "_components/PopupForm";
 import React, { useEffect, useState } from "react";
 import { appointmentActions } from "_store";
 import moment from "moment";
+import {sortBy} from 'lodash'
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +24,6 @@ function Home() {
     setRefreshList(true);
   };
 
-  
 
   const renderAppointments = () => {
     if (appointments?.loading) {
@@ -46,7 +46,9 @@ function Home() {
       );
     }
 
-    return appointments?.value?.map((item, index) => {
+    const sortedAppointments = sortBy(appointments?.value, "createdAt").reverse()
+
+    return sortedAppointments.map((item, index) => {
       const formattedDate = moment(item.date).format("DD-MM-YY [à] HH:mm");
       const formattedDateCreated = moment(item?.createdAt).format("DD-MMMM");
 
@@ -78,7 +80,7 @@ function Home() {
       <br />
 
       <div className="table-wrapper">
-        <h2>Rendez-vous</h2>
+        <h2>Appointments</h2>
 
         <table className="fl-table">
           <thead>
@@ -86,10 +88,10 @@ function Home() {
               <th>#</th>
               <th>Date</th>
               <th>Name</th>
-              <th>Telephone</th>
+              <th>Phone</th>
               <th>Address</th>
-              <th>Date programmation</th>
-              <th>Commercial</th>
+              <th>Scheduling Date</th>
+              <th>Sales Representative</th>
             </tr>
           </thead>
           <tbody>

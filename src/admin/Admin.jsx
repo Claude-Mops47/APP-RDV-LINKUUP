@@ -119,11 +119,11 @@ function Admin() {
       </button>
 
       <div className="table-wrapper">
-        <h2>Liste des rendez-vous</h2>
+        <h2>Appointment List</h2>
 
         <div className="row">
           <div className="mb-3 col">
-            <label htmlFor="agentFilter">Filtre par agent : </label>
+            <label htmlFor="agentFilter">Filter by agent: </label>
             <input
               className="form-control"
               type="text"
@@ -135,14 +135,14 @@ function Admin() {
           </div>
 
           <div className="mb-3 col">
-            <label htmlFor="dateFilter">Filtre par date : </label>
+            <label htmlFor="dateFilter">Filter by date: </label>
             <select
               className="form-control"
               id="dateFilter"
               value={selectedDate}
               onChange={handleDateChange}
             >
-              <option value="">Toutes les dates</option>
+              <option value="">All dates</option>
               {getUniqueDates(sortedAppointments).map((date) => (
                 <option key={date} value={date}>
                   {date}
@@ -161,10 +161,10 @@ function Admin() {
               <th>Agent</th>
               <th>Date</th>
               <th>Name</th>
-              <th>Telephone</th>
+              <th>Phone</th>
               <th>Address</th>
-              <th>Date programmation</th>
-              <th>Commercial</th>
+              <th>Scheduling Date</th>
+              <th>Sales Representative</th>
             </tr>
           </thead>
           <tbody>
