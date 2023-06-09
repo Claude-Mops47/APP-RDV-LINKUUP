@@ -25,9 +25,7 @@ function Home() {
 
   const renderPhoneNumbers = (phone) => {
     if (Array.isArray(phone)) {
-      return phone.join(" ").split("/").map((number) => (
-        <div key={number}>{number}</div>
-      ));
+      return phone.join(" / ")
     }
     return null;
   };
@@ -63,7 +61,7 @@ function Home() {
           <td>{index + 1}</td>
           <td>{formattedDateCreated}</td>
           <td>{item.name}</td>
-          <td>{phoneNumbers}</td>
+          <td>{item.phone.join(' / ')}</td>
           <td>{item.address}</td>
           <td>{formattedDate}</td>
           <td>{item.commercial}</td>

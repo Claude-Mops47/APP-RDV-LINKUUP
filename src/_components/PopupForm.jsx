@@ -23,13 +23,25 @@ const ModalForm = ({ isOpen, onClose }) => {
     name: Yup.string().required("Le nom est requis"),
     address: Yup.string().required("L'adresse est requise"),
     commercial: Yup.string().required("Le commercial est requis"),
-    phone: Yup.string().required("Les numéros sont requis"),
+    // phone: Yup.string().required("Les numéros sont requis"),
+    phone: Yup.string().test("phone", "Les numéros sont requis", (value) => {
+      if (!value) return null;
+      const values = value.split(" / ").map((val) => val.trim());
+      return values.length === 1 || values.length === 2;
+    }),
   });
 
   const handleSubmit = async (values) => {
     dispatch(alertActions.clear());
     try {
-      await dispatch(appointmentActions.createAppointment(values));
+      const phoneValues = values.phone
+        ? values.phone.split(" / ").map((val) => val.trim())
+        : [];
+      const updateValues = {
+        ...values,
+        phone: phoneValues,
+      };
+      await dispatch(appointmentActions.createAppointment(updateValues));
       const message = "Appointment added";
       onClose();
       dispatch(alertActions.success({ message, showAtterRedirect: true }));
@@ -37,7 +49,6 @@ const ModalForm = ({ isOpen, onClose }) => {
       dispatch(alertActions.error(error));
     }
   };
-
 
   const formik = useFormik({
     initialValues,
@@ -83,7 +94,6 @@ const ModalForm = ({ isOpen, onClose }) => {
                     locale={fr}
                     autoComplete="off"
                     className="form-control"
-
                   />
                   {formik.errors.date && formik.touched.date && (
                     <div>{formik.errors.date}</div>
@@ -203,7 +213,6 @@ const ModalForm = ({ isOpen, onClose }) => {
 
 export default ModalForm;
 
-
 // import React from "react";
 // import * as Yup from "yup";
 // import DatePicker from "react-datepicker";
@@ -252,15 +261,13 @@ export default ModalForm;
 //     const { value } = event.target;
 //     const numbers = value.split('/').map((number) => number.trim());
 //     formik.setFieldValue("phone", numbers);
-//   };  
+//   };
 
 //   const formik = useFormik({
 //     initialValues,
 //     validationSchema,
 //     onSubmit: handleSubmit,
 //   });
-
-
 
 //   return (
 //     <div className={`modal ${isOpen ? "open" : ""}`}>
@@ -377,7 +384,6 @@ export default ModalForm;
 //                 )}
 //               </div>
 
-              
 //               <br />
 //               <div className="modal-footer">
 //                 <button
@@ -404,4 +410,3 @@ export default ModalForm;
 // };
 
 // export default ModalForm;
-
