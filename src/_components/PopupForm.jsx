@@ -41,9 +41,13 @@ const ModalForm = ({ isOpen, onClose }) => {
         ...values,
         phone: phoneValues,
       };
+      console.log(updateValues);
       await dispatch(appointmentActions.createAppointment(updateValues));
       const message = "Appointment added";
       onClose();
+      setTimeout(() => {
+        dispatch(alertActions.clear())
+      }, 5000);
       dispatch(alertActions.success({ message, showAtterRedirect: true }));
     } catch (error) {
       dispatch(alertActions.error(error));
@@ -101,7 +105,7 @@ const ModalForm = ({ isOpen, onClose }) => {
                 </div>
 
                 <div className="mb-3 col">
-                  <label htmlFor="nom">Nom Complet:</label>
+                  <label htmlFor="name">Nom Complet:</label>
                   <input
                     id="name"
                     name="name"
