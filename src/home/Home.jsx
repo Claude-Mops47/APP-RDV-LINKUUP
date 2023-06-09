@@ -52,7 +52,6 @@ function Home() {
     }
 
     return appointments?.value?.map((item, index) => {
-      const phoneNumbers = renderPhoneNumbers(item.phone);
       const formattedDate = moment(item.date).format("DD-MM-YY [à] HH:mm");
       const formattedDateCreated = moment(item?.createdAt).format("DD-MMMM");
 
