@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { appointmentActions } from "_store";
-import moment from "moment";
 import { Link } from "react-router-dom";
+import { sortBy } from 'lodash'
+import moment from "moment";
 
-
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
 
 
 function AllList() {
@@ -97,11 +95,7 @@ function AllList() {
     return uniqueDates;
   };
 
-  const sortedAppointments = [...(filteredAppointments || [])].sort((a, b) => {
-    const dateA = new Date(a.createdAt);
-    const dateB = new Date(b.createdAt);
-    return dateB - dateA;
-  });
+  const sortedAppointments = sortBy(filteredAppointments, "createdAt").reverse()
 
   const indexOfLastAppointment = currentPage * appointmentsPerPage;
   const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
@@ -172,6 +166,7 @@ function AllList() {
               <th>Address</th>
               <th>Scheduling Date</th>
               <th>Sales Representative</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -194,32 +189,7 @@ function AllList() {
                   <td>
                     <Link to={`../appointments/edit/${item._id}`} className="btn btn-sm btn-outline-primary me-1">Edit</Link>
 
-                    <button
-                      onClick={() =>{
-                        confirmAlert({
-                          title: 'Confirm deletion',
-                          message: 'Are you sure you want to delete this appointment?',
-                          buttons:[{
-                            label: 'Yes',
-                            onClick: ()=> dispatch(appointmentActions.deleteAppointment(item._id))
-                          },{
-                            label:"No",
-                            onClick: ()=> {}
-                          }
-                        ]
-                        })
-
-                      }
-                      }
-                      className="btn btn-outtline-danger-primary me-1"
-                      disabled={item.isDeleting}
-                    >
-                      {item.isDeleting ? (
-                        <span className="spinner-border spinner-border-sm"></span>
-                      ) : (
-                        <span>Delete</span>
-                      )}
-                    </button>
+                    
                   </td>
                 </tr>
               );

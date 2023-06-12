@@ -1,10 +1,9 @@
-
 import { useDispatch, useSelector } from "react-redux";
 import ModalForm from "_components/PopupForm";
 import React, { useEffect, useState } from "react";
 import { appointmentActions } from "_store";
 import moment from "moment";
-import {sortBy} from 'lodash'
+import { sortBy } from "lodash";
 
 function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +22,6 @@ function Home() {
     setIsModalOpen(false);
     setRefreshList(true);
   };
-
 
   const renderAppointments = () => {
     if (appointments?.loading) {
@@ -46,18 +44,21 @@ function Home() {
       );
     }
 
-    const sortedAppointments = sortBy(appointments?.value, "createdAt").reverse()
+    const sortedAppointments = sortBy(
+      appointments?.value,
+      "createdAt"
+    ).reverse();
 
     return sortedAppointments.map((item, index) => {
       const formattedDate = moment(item.date).format("DD-MM-YY [à] HH:mm");
       const formattedDateCreated = moment(item?.createdAt).format("DD-MMMM");
 
       return (
-        <tr key={item._id}>
+        <tr key={item?._id}>
           <td>{index + 1}</td>
           <td>{formattedDateCreated}</td>
           <td>{item.name}</td>
-          <td>{item.phone.join(' / ')}</td>
+          <td>{item.phone?.join(" / ")}</td>
           <td>{item.address}</td>
           <td>{formattedDate}</td>
           <td>{item.commercial}</td>
@@ -94,9 +95,7 @@ function Home() {
               <th>Sales Representative</th>
             </tr>
           </thead>
-          <tbody>
-            {renderAppointments()}
-          </tbody>
+          <tbody>{renderAppointments()}</tbody>
         </table>
       </div>
     </div>

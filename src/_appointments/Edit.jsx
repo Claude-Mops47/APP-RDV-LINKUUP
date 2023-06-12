@@ -1,50 +1,61 @@
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 import { alertActions, appointmentActions } from "_store";
 import { useFormik } from "formik";
 import DatePicker from "react-datepicker";
-import fr from "date-fns/locale/fr";
 import "react-datepicker/dist/react-datepicker.css";
-import { useEffect } from "react";
 import { history } from "_helpers";
 
-export { Edit };
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
-function Edit() {
+export function Edit() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const appointments = useSelector((state) => state.appointments.item);
+  const [date, setDate] = useState(new Date());
 
-  // form
+  // Form
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
-    phone: Yup.string().required("Phone is required"),
     address: Yup.string().required("Address is required"),
     date: Yup.date().required("Date is required"),
     commercial: Yup.string().required("Commercial is required"),
-    status: Yup.string().required("Status is required"),
+    // status: Yup.string().required("Status is required"),
+    phone: Yup.string().test("phone", "Les numéros sont requis", (value) => {
+      if (!value) return null;
+      const values = value.split(" / ").map((val) => val.trim());
+      return values.length === 1 || values.length === 2;
+    }),
   });
-
-  console.log(id);
-
-  //   const formOptions = { resolver: yupResolver(validationSchema) };
-
-  //   const { register, handleSubmit, reset, formState } = useForm(formOptions);
-  //   const { errors, isSubmitting } = formState;
 
   useEffect(() => {
     dispatch(appointmentActions.getAppointment(id))
       .unwrap()
-    //   .then((x) => reset(x));
+      .then((appointment) => {
+        formik.setValues(appointment);
+      });
   }, [dispatch, id]);
-  console.log(appointments);
-
 
   const formik = useFormik({
+    initialValues: {
+      name: "",
+      phone: "",
+      address: "",
+      date: date.toISOString(),
+      commercial: "",
+      // status: "",
+    },
     validationSchema,
     onSubmit: handleSubmit,
   });
+
+  const handleDateChange = (date) => {
+    setDate(date);
+    formik.setFieldValue("date", date.toISOString());
+  };
 
   const handleChange = (event) => {
     formik.handleChange(event);
@@ -54,17 +65,25 @@ function Edit() {
     formik.handleBlur(event);
   };
 
-  const onClose = () => {
-    console.log("ok return");
+  const handleCancel = () => {
+    history.navigate("/admin");
   };
 
-  async function handleSubmit(data) {
+  async function handleSubmit(values) {
     dispatch(alertActions.clear());
     try {
       let message = "Appointment updated";
-      //   await dispatch(appointmentActions.updateAppointment(id, data)).unwrap();
-      console.log(data);
-      //   history.navigate("/admin");
+
+      const phoneValues = values.phone
+        ? values.phone.split(" / ").map((val) => val.trim())
+        : [];
+      const updateValues = {
+        ...values,
+        phone: phoneValues,
+      };
+      console.log(updateValues);
+      // await dispatch(appointmentActions.updateAppointment(id, data)).unwrap();
+      history.navigate("/admin");
       dispatch(alertActions.success({ message, showAfterRedirect: true }));
     } catch (error) {
       dispatch(alertActions.error(error));
@@ -73,137 +92,202 @@ function Edit() {
 
   return (
     <>
-    <h2>ok</h2>
-      {/* {!(appointments?.loading || appointments?.error) && (
-        // <form onSubmit={handleSubmit(onSubmit)}>
-        <form onSubmit={formik.handleSubmit}>
-          <div className="row">
-            <div className="mb-3 col">
-              <label htmlFor="date">Scheduling Date:</label>
-              <DatePicker
-                id="date"
-                name="date"
-                selected={formik.values.date}
-                onChange={(date) => formik.setFieldValue("date", date)}
-                dateFormat="PP à p"
-                showIcon
-                showTimeSelect
-                timeIntervals={30}
-                timeFormat="HH:mm"
-                isClearable
-                locale={fr}
-                autoComplete="off"
-                className="form-control"
-              />
-              {formik.errors.date && formik.touched.date && (
-                <div>{formik.errors.date}</div>
-              )}
+      <h2>Edit Appointment</h2>
+      {!appointments?.loading && !appointments?.error && (
+        <>
+          <form onSubmit={formik.handleSubmit}>
+            <div className="row">
+              <div className="mb-3 col">
+                <label htmlFor="date">Scheduling Date:</label>
+                <DatePicker
+                  id="date"
+                  name="date"
+                  selected={date}
+                  onChange={handleDateChange}
+                  onBlur={handleBlur}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  dateFormat="yyyy-MM-dd HH:mm"
+                  className="form-control"
+                />
+
+                {formik.errors.date && formik.touched.date && (
+                  <div className="error"> {formik.errors.date}</div>
+                )}
+              </div>
+
+              <div className="mb-3 col">
+                <label htmlFor="name">Full Name:</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={formik.values.name}
+                  className="form-control"
+                  autoComplete="off"
+                />
+                {formik.errors.name && formik.touched.name && (
+                  <div className="error">{formik.errors.name}</div>
+                )}
+              </div>
             </div>
 
-            <div className="mb-3 col">
-              <label htmlFor="name">Full Name:</label>
+            <div className="row">
+              <div className="mb-3 col">
+                <label htmlFor="phone">Phone:</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="text"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={formik.values.phone}
+                  className="form-control"
+                  autoComplete="off"
+                  placeholder="Fixe / Mobile"
+                />
+                {formik.errors.phone && formik.touched.phone && (
+                  <div className="error">{formik.errors.phone}</div>
+                )}
+              </div>
+
+              <div className="mb-3 col">
+                <label htmlFor="commercial">Sales Representative:</label>
+                <select
+                  id="commercial"
+                  name="commercial"
+                  type="text"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={formik.values.commercial}
+                  className="form-control"
+                  autoComplete="off"
+                >
+                  <option value="">Select Sales Representative</option>
+                  <option value="Annabelle Rodriguez">
+                    Annabelle Rodriguez
+                  </option>
+                  <option value="Benoît Chamboissier">
+                    Benoît Chamboissier
+                  </option>
+                  <option value="Freddy Tamboers">Freddy Tamboers</option>
+                  <option value="Julien Morel">Julien Morel</option>
+                  <option value="Théo Raymond">Théo Raymond</option>
+                  <option value="Aurore Diaollo">Aurore Diaollo</option>
+                  <option value="Simon Cadenne">Simon Cadenne</option>
+                </select>
+                {formik.errors.commercial && formik.touched.commercial && (
+                  <div className="error">{formik.errors.commercial}</div>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="address">Address:</label>
               <input
-                id="name"
-                name="name"
+                id="address"
+                name="address"
                 type="text"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formik.values.name}
+                value={formik.values.address}
                 className="form-control"
                 autoComplete="off"
               />
-              {formik.errors.name && formik.touched.name && (
-                <div>{formik.errors.name}</div>
-              )}
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="mb-3 col">
-              <label htmlFor="phone">Phone:</label>
-              <input
-                id="phone"
-                name="phone"
-                type="text"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={formik.values.phone}
-                className="form-control"
-                autoComplete="off"
-                placeholder="Fixe / Mobile"
-              />
-              {formik.errors.phone && formik.touched.phone && (
-                <div>{formik.errors.phone}</div>
+              {formik.errors.address && formik.touched.address && (
+                <div className="error">{formik.errors.address}</div>
               )}
             </div>
 
-            <div className="mb-3 col">
-              <label htmlFor="commercial">Sales Respresentative:</label>
+            <div>
+              <label htmlFor="status">Status:</label>
               <select
-                id="commercial"
-                name="commercial"
+                id="status"
+                name="status"
                 type="text"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={formik.values.commercial}
+                value={formik.values.status}
                 className="form-control"
                 autoComplete="off"
               >
-                <option value="">Select Sales Representative</option>
-                <option value="Annabelle Rodriguez">Annabelle Rodriguez</option>
-                <option value="Benoît Chamboissier">Benoît Chamboissier</option>
-                <option value="Freddy Tamboers">Freddy Tamboers</option>
-                <option value="Julien Morel">Julien Morel</option>
-                <option value="Théo Raymond">Théo Raymond</option>
-                <option value="Aurore Diaollo">Aurore Diaollo</option>
-                <option value="Simon Cadenne">Simon Cadenne</option>
+                <option value="">Select Status</option>
+                <option value="Confirmé">Confirmé</option>
+                <option value="En Attente">En Attente</option>
+                <option value="Annulé">Annulé</option>
+                <option value="Pas Intéressé">Pas Intéressé</option>
+                <option value="A Rappeler">A Rappeler</option>
+                <option value="Date Eloignée">Date Eloignée</option>
               </select>
-              {formik.errors.commercial && formik.touched.commercial && (
-                <div>{formik.errors.commercial}</div>
+              {formik.errors.status && formik.touched.status && (
+                <div className="error">{formik.errors.status}</div>
               )}
             </div>
-          </div>
 
-          <div>
-            <label htmlFor="address">Address:</label>
-            <input
-              id="address"
-              name="address"
-              type="text"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={formik.values.address}
-              className="form-control"
-              autoComplete="off"
-            />
-            {formik.errors.address && formik.touched.address && (
-              <div>{formik.errors.address}</div>
-            )}
-          </div>
-
-          <br />
+            <br />
+          </form>
 
           <div className="modal-footer">
             <button
-              type="submit"
-              className="btn btn-outline-primary"
-              onClick={formik.handleSubmit}
+              type="button"
+              onClick={() => {
+                confirmAlert({
+                  title: "Confirm update",
+                  message: "Are you sure you want to update this appointment?",
+                  buttons: [
+                    {
+                      label: "Yes",
+                      onClick: () => formik.submitForm(),
+                    },
+                    {
+                      label: "No",
+                      onClick: () => {},
+                    },
+                  ],
+                });
+              }}
+              className="btn btn-sm btn-outline-success me-1"
             >
-              Save
+              Update
             </button>
 
             <button
               type="button"
-              className="btn btn-outline-secondary"
-              onClick={onClose}
+              onClick={() => {
+                confirmAlert({
+                  title: "Confirm deletion",
+                  message: "Are you sure you want to delete this appointment?",
+                  buttons: [
+                    {
+                      label: "Yes",
+                      onClick: () =>
+                        dispatch(appointmentActions.deleteAppointment(id)),
+                    },
+                    {
+                      label: "No",
+                      onClick: () => {},
+                    },
+                  ],
+                });
+              }}
+              className="btn btn-sm btn-outline-danger me-1"
             >
-              Close
+              Delete
+            </button>
+
+            <button
+              type="button"
+              // className="btn btn-outline-secondary"
+              className="btn btn-sm btn-outline-secondary me-1"
+              onClick={handleCancel}
+            >
+              Cancel
             </button>
           </div>
-        </form>
-
-        // </form>
-            )}*/}
+        </>
+      )}
       {appointments?.loading && (
         <div className="text-center m-5">
           <span className="spinner-border spinner-border-lg align-center"></span>
@@ -215,8 +299,7 @@ function Edit() {
             Error loading appointment: {appointments.error}
           </div>
         </div>
-      )} 
+      )}
     </>
   );
 }
-

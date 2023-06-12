@@ -41,7 +41,6 @@ const ModalForm = ({ isOpen, onClose }) => {
         ...values,
         phone: phoneValues,
       };
-      console.log(updateValues);
       await dispatch(appointmentActions.createAppointment(updateValues));
       const message = "Appointment added";
       onClose();
