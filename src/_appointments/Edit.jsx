@@ -262,8 +262,10 @@ export function Edit() {
                   buttons: [
                     {
                       label: "Yes",
-                      onClick: () =>
-                        dispatch(appointmentActions.deleteAppointment(id)),
+                      onClick: () => {
+                        dispatch(appointmentActions.deleteAppointment(id));
+                        history.navigate("/admin");
+                      },
                     },
                     {
                       label: "No",
