@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { fetchWrapper } from '_helpers';
+import { fetchWrapper } from "_helpers";
 
-const name = 'appointments';
+const name = "appointments";
 const initialState = createInitialState();
 const extraActions = createExtraActions();
 const extraReducers = createExtraReducers();
@@ -30,12 +30,19 @@ function createExtraActions() {
     ),
     createAppointment: createAsyncThunk(
       `${name}/createAppointment`,
-      async (appointment) => await fetchWrapper.post(`${baseUrl}/add-new`, appointment)
+      async (appointment) =>
+        await fetchWrapper.post(`${baseUrl}/add-new`, appointment)
     ),
+
     getAppointment: createAsyncThunk(
       `${name}/getAppointment`,
       async (id) => await fetchWrapper.get(`${baseUrl}/${id}`)
     ),
+    getAppointmentByUser: createAsyncThunk(
+      `${name}/getAppointmentByUser`,
+      async (id) => await fetchWrapper.get(`${baseUrl}/user/${id}`)
+    ),
+
     updateAppointment: createAsyncThunk(
       `${name}/updateAppointment`,
       async ({ id, data }, { dispatch }) => {
@@ -65,6 +72,7 @@ function createExtraReducers() {
       .addCase(extraActions.getAllAppointments.rejected, (state, action) => {
         state.list = { error: action.error };
       })
+
       .addCase(extraActions.getAppointment.pending, (state) => {
         state.item = { loading: true };
       })
@@ -74,6 +82,17 @@ function createExtraReducers() {
       .addCase(extraActions.getAppointment.rejected, (state, action) => {
         state.item = { error: action.error };
       })
+
+      .addCase(extraActions.getAppointmentByUser.pending, (state) => {
+        state.item = { loading: true };
+      })
+      .addCase(extraActions.getAppointmentByUser.fulfilled, (state, action) => {
+        state.item = { value: action.payload };
+      })
+      .addCase(extraActions.getAppointmentByUser.rejected, (state, action) => {
+        state.item = { error: action.error };
+      })
+
       .addCase(extraActions.updateAppointment.pending, (state) => {
         state.item = { ...state.item, updating: true };
       })

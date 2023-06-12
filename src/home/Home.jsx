@@ -14,7 +14,7 @@ function Home() {
   const appointments = useSelector((state) => state.appointments.item);
 
   useEffect(() => {
-    dispatch(appointmentActions.getAppointment(auth?.id));
+    dispatch(appointmentActions.getAppointmentByUser(auth?.id));
     setRefreshList(false);
   }, [dispatch, auth?.id, refreshList]);
 
