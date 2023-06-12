@@ -57,7 +57,7 @@ function AllList() {
   const [filterAgent, setFilterAgent] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedDate, setSelectedDate] = useState("");
-  const appointmentsPerPage = 20;
+  const appointmentsPerPage = 25;
 
   const filteredDateAppointments = selectedDate
     ? appointments?.value?.filter(
