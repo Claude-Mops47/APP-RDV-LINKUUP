@@ -11,7 +11,6 @@ function Nav() {
     const logout = () => dispatch(authActions.logout());
     
     const role = auth?.user?.role
-    // console.log(role);
     // only show nav when logged in
     if (!auth) return null;
     

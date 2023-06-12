@@ -1,3 +1,6 @@
+html {
+  touch-action: manipulation;
+}
 .app-container {
   min-height: 550px;
 }

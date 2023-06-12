@@ -11,6 +11,7 @@ import { Nav, Alert, PrivateRoute } from "_components";
 import { Home } from "home";
 import { AccountLayout } from "account";
 import { UsersLayout } from "users";
+import { AppointmentsLayout, Edit } from "_appointments";
 import { Admin } from "admin";
 import { useSelector } from "react-redux";
 
@@ -42,6 +43,7 @@ function App() {
               <Route path="/admin" element={<Admin />} />
             )}
             <Route path="users/*" element={<UsersLayout />} />
+            <Route path="appointments/edit/:id" element={<Edit />} />
           </Route>
           {/* public */}
           <Route path="account/*" element={<AccountLayout />} />

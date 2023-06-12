@@ -80,6 +80,7 @@ const ModalForm = ({ isOpen, onClose }) => {
           </div>
 
           <div className="modal-body">
+            
             <form onSubmit={formik.handleSubmit}>
               <div className="row">
                 <div className="mb-3 col">
@@ -208,6 +209,7 @@ const ModalForm = ({ isOpen, onClose }) => {
                 </button>
               </div>
             </form>
+
           </div>
         </div>
       </div>
