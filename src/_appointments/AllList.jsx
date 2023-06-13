@@ -13,7 +13,7 @@ function AllList() {
 
   useEffect(() => {
     dispatch(appointmentActions.getAllAppointments());
-  }, []);
+  }, [dispatch]);
 
   //   function download
 

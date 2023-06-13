@@ -22,25 +22,117 @@ function createInitialState() {
 
 function createExtraActions() {
   const baseUrl = `${process.env.REACT_APP_API_URL}/appointments`;
+  // let updateTimeout = null;
+  let getAppointmentTimeout = null;
+  let getAppointmentByUserTimeout = null;
+  let getAllAppointmentsTimeout = null;
 
   return {
+    // getAllAppointments: createAsyncThunk(
+    //   `${name}/getAllAppointments`,
+    //   async () => await fetchWrapper.get(`${baseUrl}`)
+    // ),
+
     getAllAppointments: createAsyncThunk(
       `${name}/getAllAppointments`,
-      async () => await fetchWrapper.get(`${baseUrl}`)
+      async (_, { getState }) => {
+        const { list } = getState().appointments;
+
+        // Vérifier si les données sont déjà présentes dans le cache
+        if (list && list.value) {
+          return list.value;
+        }
+
+        // Annuler l'appel en cours s'il existe
+        if (getAllAppointmentsTimeout) {
+          clearTimeout(getAllAppointmentsTimeout);
+        }
+
+        // Récupérer les données après un délai de 5 minutes
+        return new Promise((resolve, reject) => {
+          getAllAppointmentsTimeout = setTimeout(async () => {
+            try {
+              const response = await fetchWrapper.get(`${baseUrl}`);
+              resolve(response);
+            } catch (error) {
+              reject(error);
+            }
+          }, 1000);
+        });
+      }
     ),
+
     createAppointment: createAsyncThunk(
       `${name}/createAppointment`,
       async (appointment) =>
         await fetchWrapper.post(`${baseUrl}/add-new`, appointment)
     ),
 
+    // getAppointment: createAsyncThunk(
+    //   `${name}/getAppointment`,
+    //   async (id) => await fetchWrapper.get(`${baseUrl}/${id}`)
+    // ),
+    // getAppointmentByUser: createAsyncThunk(
+    //   `${name}/getAppointmentByUser`,
+    //   async (id) => await fetchWrapper.get(`${baseUrl}/user/${id}`)
+    // ),
+
     getAppointment: createAsyncThunk(
       `${name}/getAppointment`,
-      async (id) => await fetchWrapper.get(`${baseUrl}/${id}`)
+      async (id, { getState }) => {
+        const { item } = getState().appointments;
+
+        // Vérifier si les données sont déjà présentes dans le cache
+        if (item && item.value && item.value.id === id) {
+          return item.value;
+        }
+
+        // Annuler l'appel en cours s'il existe
+        if (getAppointmentTimeout) {
+          clearTimeout(getAppointmentTimeout);
+        }
+
+        // Récupérer les données après un délai de 5 minutes
+        return new Promise((resolve, reject) => {
+          getAppointmentTimeout = setTimeout(async () => {
+            try {
+              const response = await fetchWrapper.get(`${baseUrl}/${id}`);
+              resolve(response);
+            } catch (error) {
+              reject(error);
+            }
+          }, 1000);
+        });
+      }
     ),
+
     getAppointmentByUser: createAsyncThunk(
       `${name}/getAppointmentByUser`,
-      async (id) => await fetchWrapper.get(`${baseUrl}/user/${id}`)
+      async (id, { getState }) => {
+        const { item } = getState().appointments;
+
+        // Vérifier si les données sont déjà présentes dans le cache
+        if (item && item.value && item.value.userId === id) {
+          return item.value;
+        }
+
+        // Annuler l'appel en cours s'il existe
+        if (getAppointmentByUserTimeout) {
+          clearTimeout(getAppointmentByUserTimeout);
+        }
+
+        // Récupérer les données après un délai de 5 minutes
+        return new Promise((resolve, reject) => {
+          getAppointmentByUserTimeout = setTimeout(async () => {
+            try {
+              const response = await fetchWrapper.get(`${baseUrl}/user/${id}`);
+              resolve(response);
+            } catch (error) {
+              reject(error);
+            }
+          }, 1000);
+        });
+      }
     ),
 
     updateAppointment: createAsyncThunk(
