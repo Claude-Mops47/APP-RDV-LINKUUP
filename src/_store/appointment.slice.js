@@ -57,7 +57,7 @@ function createExtraActions() {
             } catch (error) {
               reject(error);
             }
-          }, 1000);
+          }, 500);
         });
       }
     ),
@@ -101,7 +101,7 @@ function createExtraActions() {
             } catch (error) {
               reject(error);
             }
-          }, 1000);
+          }, 500);
         });
       }
     ),
@@ -130,7 +130,7 @@ function createExtraActions() {
             } catch (error) {
               reject(error);
             }
-          }, 1000);
+          }, 500);
         });
       }
     ),
