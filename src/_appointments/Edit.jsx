@@ -15,7 +15,7 @@ export function Edit() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const appointments = useSelector((state) => state.appointments.item);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null);
 
   // Form
   const validationSchema = Yup.object().shape({
@@ -35,7 +35,11 @@ export function Edit() {
     dispatch(appointmentActions.getAppointment(id))
       .unwrap()
       .then((appointment) => {
-        formik.setValues(appointment);
+        formik.setValues({
+          ...appointment,
+          date: appointment.date ? new Date(appointment.date) : null,
+        });
+        setDate(appointment.date ? new Date(appointment.date) : null);
       });
   }, [dispatch, id]);
 
@@ -44,7 +48,7 @@ export function Edit() {
       name: "",
       phone: "",
       address: "",
-      date: date.toISOString(),
+      date: null,
       commercial: "",
       // status: "",
     },
@@ -77,12 +81,24 @@ export function Edit() {
       const phoneValues = values.phone
         ? values.phone.split(" / ").map((val) => val.trim())
         : [];
+      const date = values.date;
+      const name = values.name;
+      const address = values.address;
+      const commercial = values.commercial;
+
       const updateValues = {
-        ...values,
+        name: name,
+        date: date,
+        address: address,
+        commercial: commercial,
         phone: phoneValues,
       };
+
       console.log(updateValues);
-      // await dispatch(appointmentActions.updateAppointment(id, data)).unwrap();
+      await dispatch(
+        appointmentActions.updateAppointment({ id: id, values: updateValues })
+      );
+      // .unwrap();
       history.navigate("/admin");
       dispatch(alertActions.success({ message, showAfterRedirect: true }));
     } catch (error) {
@@ -99,6 +115,7 @@ export function Edit() {
             <div className="row">
               <div className="mb-3 col">
                 <label htmlFor="date">Scheduling Date:</label>
+
                 <DatePicker
                   id="date"
                   name="date"

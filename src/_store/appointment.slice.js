@@ -45,8 +45,8 @@ function createExtraActions() {
 
     updateAppointment: createAsyncThunk(
       `${name}/updateAppointment`,
-      async ({ id, data }, { dispatch }) => {
-        await fetchWrapper.put(`${baseUrl}/${id}`, data);
+      async ({ id, values }, { dispatch }) => {
+        await fetchWrapper.put(`${baseUrl}/${id}`, values);
         // dispatch(appointmentActions.setUpdatedAppointment({ id, data }));
       }
     ),

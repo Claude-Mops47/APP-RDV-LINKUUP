@@ -50,16 +50,16 @@ function Home() {
     ).reverse();
 
     return sortedAppointments.map((item, index) => {
-      const formattedDate = moment(item.date).format("DD-MM-YY [à] HH:mm");
-      const formattedDateCreated = moment(item?.createdAt).format("DD-MMMM");
+      const formattedDate = moment(item?.date).format("DD-MM-YY [à] HH:mm");
+      const formattedDateCreated = moment(item?.createdAt).format("DD-MM [à] HH:mm");
 
       return (
-        <tr key={item?._id}>
+        <tr key={item?.id}>
           <td>{index + 1}</td>
           <td>{formattedDateCreated}</td>
-          <td>{item.name}</td>
-          <td>{item.phone?.join(" / ")}</td>
-          <td>{item.address}</td>
+          <td>{item.name?.toUpperCase()}</td>
+          <td>{item.phone?.join(" / ").toLocaleString("fr-FR")}</td>
+          <td>{item.address?.toLowerCase()}</td>
           <td>{formattedDate}</td>
           <td>{item.commercial}</td>
         </tr>

@@ -172,8 +172,8 @@ function AllList() {
           <tbody>
             {currentAppointments.map((item, index) => {
               const agent = item.posted_by?.firstName;
-              const DateProg = moment(item.date).format("DD-MM-YY [à] HH:mm");
-              const DateCreated = moment(item?.createdAt).format("DD-MMMM");
+              const DateProg = moment(item.date).format("DD-MM-YY - HH:mm");
+              const DateCreated = moment(item?.createdAt).format("DD-MM - HH:mm");
               
 
               return (
