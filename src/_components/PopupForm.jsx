@@ -45,7 +45,7 @@ const ModalForm = ({ isOpen, onClose }) => {
       const message = "Appointment added";
       onClose();
       setTimeout(() => {
-        dispatch(alertActions.clear())
+        dispatch(alertActions.clear());
       }, 5000);
       dispatch(alertActions.success({ message, showAtterRedirect: true }));
     } catch (error) {
@@ -69,146 +69,194 @@ const ModalForm = ({ isOpen, onClose }) => {
 
   return (
     <div className={`modal ${isOpen ? "open" : ""}`}>
-      <div className="col-md-8 offset-md-1 mt-6">
-        <div className="card">
-          <div className="modal-header">
-            <h2 className="modal-title">Add New Appointment</h2>
-            <button type="button" className="close" onClick={onClose}>
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+      <div className="py-10 bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0">
+        <div className="container mx-auto w-10/12 md:w-2/3 max-w-lg">
+          <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
+            <h2 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">
+              Add New Appointment
+            </h2>
 
-          <div className="modal-body">
-            
             <form onSubmit={formik.handleSubmit}>
-              <div className="row">
-                <div className="mb-3 col">
-                  <label htmlFor="date">Scheduling Date:</label>
-                  <DatePicker
-                    id="date"
-                    name="date"
-                    selected={formik.values.date}
-                    onChange={(date) => formik.setFieldValue("date", date)}
-                    dateFormat="PP à p"
-                    showIcon
-                    showTimeSelect
-                    timeIntervals={30}
-                    timeFormat="HH:mm"
-                    isClearable
-                    locale={fr}
-                    autoComplete="off"
-                    className="form-control"
-                  />
-                  {formik.errors.date && formik.touched.date && (
-                    <div>{formik.errors.date}</div>
-                  )}
-                </div>
+              {/* input date */}
+              <label
+                htmlFor="date"
+                className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+              >
+                Scheduling Date
+              </label>
+              <DatePicker
+                className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                id="date"
+                name="date"
+                selected={formik.values.date}
+                onChange={(date) => formik.setFieldValue("date", date)}
+                dateFormat="PP à p"
+                showIcon
+                showTimeSelect
+                timeIntervals={30}
+                timeFormat="HH:mm"
+                isClearable
+                locale={fr}
+                autoComplete="off"
+              />
+              {formik.errors.date && formik.touched.date && (
+                <div>{formik.errors.date}</div>
+              )}
 
-                <div className="mb-3 col">
-                  <label htmlFor="name">Full Name:</label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={formik.values.name}
-                    className="form-control"
-                    autoComplete="off"
-                  />
-                  {formik.errors.name && formik.touched.name && (
-                    <div>{formik.errors.name}</div>
-                  )}
-                </div>
-              </div>
+              {/* input name */}
+              <label
+                htmlFor="name"
+                className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+              >
+                Full Name
+              </label>
+              <input
+                className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                placeholder="James"
+                id="name"
+                name="name"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formik.values.name}
+                autoComplete="off"
+              />
+              {formik.errors.name && formik.touched.name && (
+                <div>{formik.errors.name}</div>
+              )}
 
-              <div className="row">
-                <div className="mb-3 col">
-                  <label htmlFor="phone">Phone:</label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="text"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={formik.values.phone}
-                    className="form-control"
-                    autoComplete="off"
-                    placeholder="Fixe / Mobile"
-                  />
-                  {formik.errors.phone && formik.touched.phone && (
-                    <div>{formik.errors.phone}</div>
-                  )}
-                </div>
+              <label
+                htmlFor="phone"
+                className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+              >
+                Phone
+              </label>
+              <input
+                className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                id="phone"
+                name="phone"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formik.values.phone}
+                autoComplete="off"
+                placeholder="Fixe / Mobile"
+              />
+              {formik.errors.phone && formik.touched.phone && (
+                <div>{formik.errors.phone}</div>
+              )}
 
-                <div className="mb-3 col">
-                  <label htmlFor="commercial">Sales Respresentative:</label>
-                  <select
-                    id="commercial"
-                    name="commercial"
-                    type="text"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={formik.values.commercial}
-                    className="form-control"
-                    autoComplete="off"
-                  >
-                    <option value="">Select Sales Representative</option>
-                    <option value="Annabelle Rodriguez">
-                      Annabelle Rodriguez
-                    </option>
-                    <option value="Benoît Chamboissier">
-                      Benoît Chamboissier
-                    </option>
-                    <option value="Freddy Tamboers">Freddy Tamboers</option>
-                    <option value="Julien Morel">Julien Morel</option>
-                    <option value="Théo Raymond">Théo Raymond</option>
-                    <option value="Aurore Diaollo">Aurore Diaollo</option>
-                    <option value="Simon Cadenne">Simon Cadenne</option>
-                  </select>
-                  {formik.errors.commercial && formik.touched.commercial && (
-                    <div>{formik.errors.commercial}</div>
-                  )}
-                </div>
-              </div>
+              <label
+                htmlFor="address"
+                className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+              >
+                Address
+              </label>
+              <textarea
+                className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                id="address"
+                name="address"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={formik.values.address}
+                autoComplete="off"
+              />
+              {formik.errors.address && formik.touched.address && (
+                <div>{formik.errors.address}</div>
+              )}
 
-              <div>
-                <label htmlFor="address">Address:</label>
-                <input
-                  id="address"
-                  name="address"
+              <label
+                htmlFor="commercial"
+                className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+              >
+                Sales Respresentative
+              </label>
+              <div className="relative font-normal text-xs sm:text-sm flex items-center text-gray-600">
+                <select
+                  className="cursor-pointer focus:text-indigo-600 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md focus:ring-indigo-600 w-full appearance-none pr-8 py-1 pl-2"
+                  // className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                  id="commercial"
+                  name="commercial"
                   type="text"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={formik.values.address}
-                  className="form-control"
+                  value={formik.values.commercial}
                   autoComplete="off"
-                />
-                {formik.errors.address && formik.touched.address && (
-                  <div>{formik.errors.address}</div>
-                )}
+                >
+                  <option value="">Select Sales Representative</option>
+                  <option value="Annabelle Rodriguez">
+                    Annabelle Rodriguez
+                  </option>
+                  <option value="Benoît Chamboissier">
+                    Benoît Chamboissier
+                  </option>
+                  <option value="Freddy Tamboers">Freddy Tamboers</option>
+                  <option value="Julien Morel">Julien Morel</option>
+                  <option value="Théo Raymond">Théo Raymond</option>
+                  <option value="Aurore Diaollo">Aurore Diaollo</option>
+                  <option value="Simon Cadenne">Simon Cadenne</option>
+                </select>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="pointer-events-none absolute right-0 mr-2 icon icon-tabler icon-tabler-chevron-down"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z"></path>
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
               </div>
-
+              {formik.errors.commercial && formik.touched.commercial && (
+                <div>{formik.errors.commercial}</div>
+              )}
               <br />
 
-              <div className="modal-footer">
+              <div className="flex items-center justify-start w-full">
                 <button
-                  type="submit"
-                  className="btn btn-outline-primary"
+                  className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
+                  type="button"
                   onClick={formik.handleSubmit}
+
                 >
                   Save
                 </button>
                 <button
+                  className="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
                   type="button"
-                  className="btn btn-outline-secondary"
                   onClick={onClose}
                 >
-                  Close
+                  Cancel
                 </button>
               </div>
-            </form>
 
+              <button
+                className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600"
+                onClick={onClose}
+                aria-label="close modal"
+                type="button"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-x"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2.5"
+                  stroke="currentColor"
+                  fill="none"
+                  // stroke-linecap="round"
+                  // stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </form>
           </div>
         </div>
       </div>

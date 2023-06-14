@@ -30,10 +30,12 @@ function App() {
   const userRole = isAuthenticated ? auth.value.user.role : "";
 
   return (
-    <div className="app-container bg-light">
+    // <div className="app-container bg-light">
+    <div className="">
       <Nav />
       <Alert />
-      <div className="container pt-4 pb-8">
+      {/* <div className="container pt-4 pb-8"> */}
+      <div className="">
         <Routes>
           {/* private */}
           <Route element={<PrivateRoute />}>
