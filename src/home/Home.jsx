@@ -158,52 +158,28 @@ function Home() {
                 <table className="min-w-full leading-normal">
                   <thead>
                     <tr>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
+                      <th className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         #
                       </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
+                      <th className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Date
                       </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
+                      <th className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Name
                       </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
+                      <th className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Phone
                       </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
+                      <th className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Address
                       </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
+                      <th className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Scheduling Date
                       </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
+                      <th className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Sales Representative
                       </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
+                      <th className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                         Status
                       </th>
                     </tr>
