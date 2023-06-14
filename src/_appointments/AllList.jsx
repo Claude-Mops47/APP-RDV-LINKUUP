@@ -198,7 +198,8 @@ function AllList() {
             {/* <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto"> */}
             <div className="-mx-8 sm:-mx-10 px-8 sm:px-10 py-8 overflow-x-auto">
               <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                <div className="overflow-x-auto">
+                {/* <div className="overflow-x-auto"> */}
+
                   <table className="min-w-full leading-normal ">
                     <thead>
                       <tr>
@@ -304,14 +305,13 @@ function AllList() {
                               </p>
                             </td>
 
-                            <td className="px-2 py-2 border-b border-gray-200 bg-white ">
+                            <td className="px-3 py-3 border-b border-gray-200 bg-white ">
                               <div
                                 className="text-gray-900 text-xs sm:px-6 h-8 whitespace-no-wrap overflow-auto"
                                 style={{
-                                  maxWidth: "100px",
+                                  maxWidth: "110px",
                                 }}
                               >
-                            
                                   {item.address.toLowerCase()}
                               </div>
                             </td>
@@ -366,7 +366,8 @@ function AllList() {
                       )}
                     </tbody>
                   </table>
-                </div>
+
+                {/* </div> */}
                 <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
                   <Pagination
                     appointmentsPerPage={appointmentsPerPage}
