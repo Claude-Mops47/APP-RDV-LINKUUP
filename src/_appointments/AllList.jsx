@@ -117,7 +117,7 @@ function AllList() {
   };
 
   return (
-    <div className="w-full min-h-screen flex justify-center items-center">
+    // <div className="w-full min-h-screen flex justify-center items-center">
       <div className="antialiased font-sans bg-gray-200  max-w-screen-xl mx-auto">
         <div className="container mx-auto px-4 sm:px-8">
           <div className="py-8">
@@ -351,7 +351,7 @@ function AllList() {
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 }
 

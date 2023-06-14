@@ -77,12 +77,6 @@ function Home() {
             </p>
           </td>
 
-          {/* <td className="px-3 py-3 border-b border-gray-200 bg-white">
-            <p className="text-gray-900 text-xs whitespace-no-wrap">
-              {item.address?.toLowerCase()}
-            </p>
-          </td> */}
-
           <td className="px-3 py-3 border-b border-gray-200 bg-white ">
             <div
               className="text-gray-900 text-xs sm:px-6 h-8 whitespace-no-wrap overflow-auto"
@@ -152,7 +146,7 @@ function Home() {
               <h2 className="text-2xl font-semibold leading-tight">
                 Appointments
               </h2>
-            </>
+            </> 
             <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
               <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
                 <table className="min-w-full leading-normal">

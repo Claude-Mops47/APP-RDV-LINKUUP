@@ -153,6 +153,7 @@ const ModalForm = ({ isOpen, onClose }) => {
               <textarea
                 className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                 id="address"
+                placeholder="Maarif, Casablanca"
                 name="address"
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -162,6 +163,27 @@ const ModalForm = ({ isOpen, onClose }) => {
               {formik.errors.address && formik.touched.address && (
                 <div>{formik.errors.address}</div>
               )}
+
+              <label
+                htmlFor="comment"
+                className="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+              >
+                Comment
+              </label>
+              <textarea
+                className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                id="comment"
+                name="comment"
+                placeholder="No comment please!"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                // value={formik.values.address}
+                autoComplete="off"
+              />
+
+              {/* {formik.errors.address && formik.touched.address && ( */}
+              {/* <div>{formik.errors.address}</div> */}
+              {/* )} */}
 
               <label
                 htmlFor="commercial"
@@ -213,6 +235,7 @@ const ModalForm = ({ isOpen, onClose }) => {
               {formik.errors.commercial && formik.touched.commercial && (
                 <div>{formik.errors.commercial}</div>
               )}
+
               <br />
 
               <div className="flex items-center justify-start w-full">
@@ -220,7 +243,6 @@ const ModalForm = ({ isOpen, onClose }) => {
                   className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
                   type="button"
                   onClick={formik.handleSubmit}
-
                 >
                   Save
                 </button>
@@ -248,8 +270,8 @@ const ModalForm = ({ isOpen, onClose }) => {
                   strokeWidth="2.5"
                   stroke="currentColor"
                   fill="none"
-                  // stroke-linecap="round"
-                  // stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" />
                   <line x1="18" y1="6" x2="6" y2="18" />
