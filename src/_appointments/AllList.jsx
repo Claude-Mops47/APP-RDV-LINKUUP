@@ -311,12 +311,8 @@ function AllList() {
                                   maxWidth: "120px",
                                 }}
                               >
-                                <div
-                                  className="h-full flex items-center"
-                                  style={{ lineHeight: "1rem" }}
-                                >
+                            
                                   {item.address.toLowerCase()}
-                                </div>
                               </div>
                             </td>
 

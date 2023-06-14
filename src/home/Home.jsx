@@ -83,21 +83,16 @@ function Home() {
             </p>
           </td> */}
 
-<td className="px-2 py-2 border-b border-gray-200 bg-white ">
-                              <div
-                                className="text-gray-900 text-xs sm:px-4 h-8 whitespace-no-wrap overflow-auto"
-                                style={{
-                                  maxWidth: "120px",
-                                }}
-                              >
-                                <div
-                                  className="h-full flex items-center"
-                                  style={{ lineHeight: "1rem" }}
-                                >
-                                  {item.address?.toLowerCase()}
-                                </div>
-                              </div>
-                            </td>
+          <td className="px-2 py-2 border-b border-gray-200 bg-white ">
+            <div
+              className="text-gray-900 text-xs sm:px-4 h-8 whitespace-no-wrap overflow-auto"
+              style={{
+                maxWidth: "120px",
+              }}
+            >
+              {item.address?.toLowerCase()}
+            </div>
+          </td>
 
           <td className="px-3 py-3 border-b border-gray-200 bg-white">
             <p className="text-gray-900 text-xs whitespace-no-wrap">
@@ -128,18 +123,20 @@ function Home() {
 
   return (
     <>
-
-<div className="flex flex-col items-center">
+      <div className="flex flex-col items-center">
         <h1 className="text-3xl font-semibold leading-tight mb-4">
           Hi {auth?.firstName}!
         </h1>
-        <p className="text-x1 font-semibold leading-tight mb-4">Welcome Marketer</p>
+        <p className="text-x1 font-semibold leading-tight mb-4">
+          Welcome Marketer
+        </p>
       </div>
 
-
       <div className="w-full flex justify-center py-12">
-        <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm" 
-        onClick={openModal}>
+        <button
+          className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm"
+          onClick={openModal}
+        >
           Add new
         </button>
         {isModalOpen && <ModalForm isOpen={openModal} onClose={closeModal} />}
