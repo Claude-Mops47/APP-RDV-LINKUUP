@@ -87,7 +87,7 @@ function Home() {
             <div
               className="text-gray-900 text-xs sm:px-4 h-8 whitespace-no-wrap overflow-auto"
               style={{
-                maxWidth: "120px",
+                maxWidth: "100px",
               }}
             >
               {item.address?.toLowerCase()}

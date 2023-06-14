@@ -306,9 +306,9 @@ function AllList() {
 
                             <td className="px-2 py-2 border-b border-gray-200 bg-white ">
                               <div
-                                className="text-gray-900 text-xs sm:px-4 h-8 whitespace-no-wrap overflow-auto"
+                                className="text-gray-900 text-xs sm:px-4 h-4 whitespace-no-wrap overflow-auto"
                                 style={{
-                                  maxWidth: "120px",
+                                  maxWidth: "100px",
                                 }}
                               >
                             
