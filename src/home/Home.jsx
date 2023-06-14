@@ -76,11 +76,29 @@ function Home() {
               {item.phone?.join(" / ").toLocaleString("fr-FR")}
             </p>
           </td>
-          <td className="px-3 py-3 border-b border-gray-200 bg-white">
+
+          {/* <td className="px-3 py-3 border-b border-gray-200 bg-white">
             <p className="text-gray-900 text-xs whitespace-no-wrap">
               {item.address?.toLowerCase()}
             </p>
-          </td>
+          </td> */}
+
+<td className="px-2 py-2 border-b border-gray-200 bg-white ">
+                              <div
+                                className="text-gray-900 text-xs sm:px-4 h-8 whitespace-no-wrap overflow-auto"
+                                style={{
+                                  maxWidth: "120px",
+                                }}
+                              >
+                                <div
+                                  className="h-full flex items-center"
+                                  style={{ lineHeight: "1rem" }}
+                                >
+                                  {item.address?.toLowerCase()}
+                                </div>
+                              </div>
+                            </td>
+
           <td className="px-3 py-3 border-b border-gray-200 bg-white">
             <p className="text-gray-900 text-xs whitespace-no-wrap">
               {formattedDate}

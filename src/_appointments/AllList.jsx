@@ -122,7 +122,8 @@ function AllList() {
         <div className="container mx-auto px-4 sm:px-8">
           <div className="py-8">
             <div>
-              <h2 className="text-2xl font-semibold leading-tight">Appointments List
+              <h2 className="text-2xl font-semibold leading-tight">
+                Appointments List
               </h2>
             </div>
 
@@ -196,178 +197,180 @@ function AllList() {
 
             {/* <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto"> */}
             <div className="-mx-8 sm:-mx-10 px-8 sm:px-10 py-8 overflow-x-auto">
-            
               <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-                <table className="min-w-full leading-normal py-8 ">
-                  <thead>
-                    <tr>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
-                        #
-                      </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
-                        Agent
-                      </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
-                        Date
-                      </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
-                        Full Name
-                      </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
-                        Phone
-                      </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
-                        Address
-                      </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
-                        Scheduling Date
-                      </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
-                        Sales Respresentative
-                      </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
-                        Status
-                      </th>
-                      <th
-                        style={{ paddingLeft: "10px", paddingRight: "10px" }}
-                        className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                      >
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentAppointments.map((item, index) => {
-                      const agent = item.posted_by?.firstName;
-                      const DateProg = moment(item.date).format(
-                        "DD-MM-YY, HH:mm"
-                      );
-                      const DateCreated = moment(item?.createdAt).format(
-                        "DD-MMMM"
-                      );
+                <div className="overflow-x-auto">
+                  <table className="min-w-full leading-normal ">
+                    <thead>
+                      <tr>
+                        <th
+                          style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                          className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                        >
+                          #
+                        </th>
+                        <th
+                          style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                          className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                        >
+                          Agent
+                        </th>
+                        <th
+                          style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                          className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                        >
+                          Date
+                        </th>
+                        <th
+                          style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                          className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                        >
+                          Full Name
+                        </th>
+                        <th
+                          style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                          className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                        >
+                          Phone
+                        </th>
+                        <th
+                          style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                          className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                        >
+                          Address
+                        </th>
+                        <th
+                          style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                          className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                        >
+                          Scheduling Date
+                        </th>
+                        <th
+                          style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                          className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                        >
+                          Sales Respresentative
+                        </th>
+                        <th
+                          style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                          className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                        >
+                          Status
+                        </th>
+                        <th
+                          style={{ paddingLeft: "10px", paddingRight: "10px" }}
+                          className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                        >
+                          Action
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {currentAppointments.map((item, index) => {
+                        const agent = item.posted_by?.firstName;
+                        const DateProg = moment(item.date).format(
+                          "DD-MM-YY, HH:mm"
+                        );
+                        const DateCreated = moment(item?.createdAt).format(
+                          "DD-MMMM"
+                        );
 
-                      return (
-                        <tr key={item._id}>
-                          <td className="px-3 py-3 border-b border-gray-200 bg-white text-sm">
-                            <div className="flex text-xs items-center">
-                              {index + 1}
-                            </div>
-                          </td>
+                        return (
+                          <tr key={item._id}>
+                            <td className="px-3 py-3 border-b border-gray-200 bg-white text-sm">
+                              <div className="flex text-xs items-center">
+                                {index + 1}
+                              </div>
+                            </td>
 
-                          <td className="px-3 py-3 border-b border-gray-200 bg-white text-sm">
-                            <p className="text-gray-900 text-xs">{agent}</p>
-                          </td>
+                            <td className="px-3 py-3 border-b border-gray-200 bg-white text-sm">
+                              <p className="text-gray-900 text-xs">{agent}</p>
+                            </td>
 
-                          <td className="px-3 py-3 border-b border-gray-200 bg-white text-sm">
-                            <p className="text-gray-900 text-xs whitespace-no-wrap">
-                              {DateCreated}
-                            </p>
-                          </td>
+                            <td className="px-3 py-3 border-b border-gray-200 bg-white text-sm">
+                              <p className="text-gray-900 text-xs whitespace-no-wrap">
+                                {DateCreated}
+                              </p>
+                            </td>
 
-                          <td className=" px-3 py-3 border-b border-gray-100 bg-white text-sm">
-                            <p className="text-gray-900 text-xs whitespace-no-wrap">
-                              {item.name.toUpperCase()}
-                            </p>
-                          </td>
+                            <td className=" px-3 py-3 border-b border-gray-100 bg-white text-sm">
+                              <p className="text-gray-900 text-xs whitespace-no-wrap">
+                                {item.name.toUpperCase()}
+                              </p>
+                            </td>
 
-                          <td className="px-3 py-3 border-b border-gray-200 bg-white ">
-                            <p className="text-gray-900 text-xs whitespace-no-wrap">
-                              {item.phone.join(" / ").toLocaleString("fr-FR")}
-                            </p>
-                          </td>
+                            <td className="px-3 py-3 border-b border-gray-200 bg-white ">
+                              <p className="text-gray-900 text-xs whitespace-no-wrap">
+                                {item.phone.join(" / ").toLocaleString("fr-FR")}
+                              </p>
+                            </td>
 
-                          <td className="px-2 py-2 border-b border-gray-200 bg-white ">
-                            <div
+                            <td className="px-2 py-2 border-b border-gray-200 bg-white ">
+                              <div
+                                className="text-gray-900 text-xs sm:px-4 h-8 whitespace-no-wrap overflow-auto"
+                                style={{
+                                  maxWidth: "120px",
+                                }}
+                              >
+                                <div
+                                  className="h-full flex items-center"
+                                  style={{ lineHeight: "1rem" }}
+                                >
+                                  {item.address.toLowerCase()}
+                                </div>
+                              </div>
+                            </td>
 
-                              className="text-gray-900 text-xs sm:px-8 whitespace-no-wrap overflow-auto"
-                              // className="-mx-4 sm:-mx-8 px-4  py-4 overflow-x-auto whitespace-no-wrap"
-                              style={{
-                                // maxWidth: "60%",
-                                textOverflow: "ellipsis",
-                              }}
-                            >
-                              {item.address.toLowerCase()}
-                            </div>
-                          </td>
+                            <td className="px-3 py-3 border-b border-gray-200 bg-white">
+                              <p className="text-gray-900 text-xs whitespace-no-wrap">
+                                {DateProg}
+                              </p>
+                            </td>
 
-                          <td className="px-3 py-3 border-b border-gray-200 bg-white">
-                            <p className="text-gray-900 text-xs whitespace-no-wrap">
-                              {DateProg}
-                            </p>
-                          </td>
+                            <td className="px-3 py-3 border-b border-gray-200 bg-white ">
+                              <p className="text-gray-900 text-xs whitespace-no-wrap">
+                                {item.commercial}
+                              </p>
+                            </td>
 
-                          <td className="px-3 py-3 border-b border-gray-200 bg-white ">
-                            <p className="text-gray-900 text-xs whitespace-no-wrap">
-                              {item.commercial}
-                            </p>
-                          </td>
-
-                          <td className="px-3 py-3 border-b border-gray-200 bg-white">
-                            <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                              <span
-                                aria-hidden
-                                className="absolute text-xs inset-0 bg-green-200 opacity-50 rounded-full"
-                              ></span>
-                              <span className="relative text-xs whitespace-no-wrap">
-                                En-cours
+                            <td className="px-3 py-3 border-b border-gray-200 bg-white">
+                              <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                <span
+                                  aria-hidden
+                                  className="absolute text-xs inset-0 bg-green-200 opacity-50 rounded-full"
+                                ></span>
+                                <span className="relative text-xs whitespace-no-wrap">
+                                  En-cours
+                                </span>
                               </span>
-                            </span>
-                          </td>
+                            </td>
 
-                          <td className="px-3 py-3 border-b border-gray-200 bg-white text-sm">
-                            <p className="text-gray-900 whitespace-no-wrap">
-                              <Link to={`../appointments/edit/${item._id}`}>
-                                edit
-                              </Link>
-                            </p>
+                            <td className="px-3 py-3 border-b border-gray-200 bg-white text-sm">
+                              <p className="text-gray-900 whitespace-no-wrap">
+                                <Link to={`../appointments/edit/${item._id}`}>
+                                  edit
+                                </Link>
+                              </p>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                      {appointments?.loading && (
+                        <tr>
+                          <td className="center">
+                            <span className="spinner-border spinner-border-lg align-center"></span>
                           </td>
                         </tr>
-                      );
-                    })}
-                    {appointments?.loading && (
-                      <tr>
-                        <td className="center">
-                          <span className="spinner-border spinner-border-lg align-center"></span>
-                        </td>
-                      </tr>
-                    )}
-                    {appointments?.error && (
-                      <tr>
-                        <td className="center">
-                          <p style={{ color: "red" }}>Error Network</p>{" "}
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-
+                      )}
+                      {appointments?.error && (
+                        <tr>
+                          <td className="center">
+                            <p style={{ color: "red" }}>Error Network</p>{" "}
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
                 <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
                   <Pagination
                     appointmentsPerPage={appointmentsPerPage}
