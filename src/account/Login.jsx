@@ -19,7 +19,7 @@ function Login() {
 
   // get functions to build form with useForm() hook
   const { register, handleSubmit, formState } = useForm(formOptions);
-  const { errors, isSubmitting } = formState;
+  const {  isSubmitting } = formState;
 
   function onSubmit({ email, password }) {
     return dispatch(authActions.login({ email, password }));

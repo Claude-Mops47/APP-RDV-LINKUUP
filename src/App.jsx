@@ -11,7 +11,7 @@ import { Nav, Alert, PrivateRoute } from "_components";
 import { Home } from "home";
 import { AccountLayout } from "account";
 import { UsersLayout } from "users";
-import { AppointmentsLayout, Edit } from "_appointments";
+import {  Edit } from "_appointments";
 import { Admin } from "admin";
 import { useSelector } from "react-redux";
 
