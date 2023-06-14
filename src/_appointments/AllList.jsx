@@ -277,9 +277,9 @@ function AllList() {
 
                           <td className="px-3 py-3 border-b border-gray-200 bg-white ">
                             <div
-                              className="text-gray-900 text-xs sm:px-6 h-8 whitespace-no-wrap overflow-auto"
+                              className="text-gray-900 text-xs sm:px-6  whitespace-no-wrap overflow-auto"
                               style={{
-                                maxWidth: "110px",
+                                maxWidth: "120px",
                               }}
                             >
                               {item.address.toLowerCase()}
