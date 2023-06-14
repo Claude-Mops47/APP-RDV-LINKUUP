@@ -57,27 +57,27 @@ function Home() {
 
       return (
         <tr key={item?.id}>
-          <td className="px-3 py-3 border-b border-gray-200 bg-white">
+          <td className="px-3 py-3 border-b border-gray-300 bg-white">
             {" "}
             <div className="flex text-xs items-center">{index + 1}</div>
           </td>
-          <td className="px-3 py-3 border-b border-gray-200 bg-white">
+          <td className="px-3 py-3 border-b border-gray-300 bg-white">
             <p className="text-gray-900 text-xs whitespace-no-wrap">
               {formattedDateCreated}{" "}
             </p>
           </td>
-          <td className="px-3 py-3 border-b border-gray-200 bg-white">
+          <td className="px-3 py-3 border-b border-gray-300 bg-white">
             <p className="text-gray-900 text-xs whitespace-no-wrap">
               {item.name?.toUpperCase()}
             </p>
           </td>
-          <td className="px-3 py-3 border-b border-gray-200 bg-white">
-            <p className="text-gray-900 text-xs whitespace-no-wrap">
+          <td className="px-3 py-3 border-b border-gray-300 bg-white">
+            <p className="text-gray-900  text-xs whitespace-no-wrap">
               {item.phone?.join(" / ").toLocaleString("fr-FR")}
             </p>
           </td>
 
-          <td className="px-3 py-3 border-b border-gray-200 bg-white ">
+          <td className="px-3 py-3 border-b border-gray-300 bg-white ">
             <div
               className="text-gray-900 text-xs sm:px-6 h-8 whitespace-no-wrap overflow-auto"
               style={{
@@ -88,18 +88,18 @@ function Home() {
             </div>
           </td>
 
-          <td className="px-3 py-3 border-b border-gray-200 bg-white">
+          <td className="px-3 py-3 border-b border-gray-300 bg-white">
             <p className="text-gray-900 text-xs whitespace-no-wrap">
               {formattedDate}
             </p>
           </td>
-          <td className="px-3 py-3 border-b border-gray-200 bg-white">
+          <td className="px-3 py-3 border-b border-gray-300 bg-white">
             <p className="text-gray-900 text-xs whitespace-no-wrap">
               {item.commercial}
             </p>
           </td>
 
-          <td className="px-3 py-3 border-b border-gray-200 bg-white">
+          <td className="px-3 py-3 border-b border-gray-300 bg-gray">
             <span className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
               <span
                 aria-hidden
