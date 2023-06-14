@@ -69,9 +69,9 @@ const ModalForm = ({ isOpen, onClose }) => {
 
   return (
     <div className={`modal ${isOpen ? "open" : ""}`}>
-      <div className="py-10 bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0">
-        <div className="container mx-auto w-10/12 md:w-2/3 max-w-lg">
-          <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
+      <div className="py-6 bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0">
+        <div className="container mx-auto w-6/12 md:w-2/4 max-w-l">
+          <div className="relative py-4 px-2 md:px-6 bg-white shadow-md rounded border border-gray-400">
             <h2 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">
               Add New Appointment
             </h2>
@@ -151,7 +151,7 @@ const ModalForm = ({ isOpen, onClose }) => {
                 Address
               </label>
               <textarea
-                className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full py-2 flex items-center pl-3 text-sm border-gray-300 rounded border"
                 id="address"
                 placeholder="Maarif, Casablanca"
                 name="address"
@@ -171,7 +171,7 @@ const ModalForm = ({ isOpen, onClose }) => {
                 Comment
               </label>
               <textarea
-                className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                className="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full py-2 flex items-center pl-3 text-sm border-gray-300 rounded border"
                 id="comment"
                 name="comment"
                 placeholder="No comment please!"
