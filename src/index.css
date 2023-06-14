@@ -1,20 +1,14 @@
-html {
-  touch-action: manipulation;
-}
-.app-container {
-  min-height: 550px;
+.container {
+  /* min-height: 550px; */
+  max-width: 100%;
 }
 
 /* modal */
 
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
-  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal.open {
@@ -25,67 +19,4 @@ html {
 .error {
   color: red;
   margin-top: 0.5rem;
-}
-
-/* Table */
-
-.table-wrapper {
-  margin: 10px auto 40px;
-  box-shadow: 0px 45px 80px rgba(0, 0, 0, 0.2);
-}
-
-.fl-table {
-  border-radius: 5px;
-  font-size: 11px;
-  font-weight: normal;
-  border: none;
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 100%;
-  white-space: nowrap;
-  background-color: #fff;
-  margin: 0 auto; /* Ajout : Centrer le tableau */
-}
-
-.fl-table td,
-.fl-table th {
-  text-align: center;
-  padding: 10px;
-  max-width: 200px; /* Ajout : Limiter la largeur du contenu */
-  overflow: hidden; /* Ajout : Cacher le contenu qui dépasse */
-  text-overflow: ellipsis; /* Ajout : Ajouter des points de suspension pour le contenu débordant */
-  white-space: nowrap; /* Ajout : Empêcher le retour à la ligne du contenu */
-}
-
-.fl-table td {
-  border-right: 1px solid #f8f8f8;
-  text-align: center;
-  padding: 10px;
-  white-space: normal;
-  word-wrap: break-word;
-}
-
-.fl-table thead th {
-  color: #fff;
-  background-color: #4fc3a1;
-  padding: 10px;
-}
-.fl-table thead th:nth-child(odd) {
-  color: #ffffff;
-  background: #4f6377;
-}
-
-.fl-table tr:nth-child(odd) {
-  background-color: #f8f8f8;
-}
-
-/* Responsive */
-
-@media (max-width: 767px) {
-  .fl-table {
-    display: block;
-    overflow-x: auto;
-  }
-
-  /* Autres règles CSS pour la version responsive */
 }
