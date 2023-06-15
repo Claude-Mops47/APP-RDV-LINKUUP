@@ -148,9 +148,7 @@ const ModalForm = ({ isOpen, onClose }) => {
                             </option>
                             <option value="Julien Morel">Julien Morel</option>
                             <option value="Théo Raymond">Théo Raymond</option>
-                            <option value="Aurore Diaollo">
-                              Aurore Diaollo
-                            </option>
+                            <option value="Aurore Diallo">Aurore Diallo</option>
                             <option value="Simon Cadenne">Simon Cadenne</option>
                           </select>
                           <svg
@@ -271,34 +269,31 @@ const ModalForm = ({ isOpen, onClose }) => {
                         >
                           Cancel
                         </button>
-
-                       
                       </div>
                     </div>
                     <button
-                          className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600"
-                          onClick={onClose}
-                          aria-label="close modal"
-                          type="button"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-x"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            strokeWidth="2.5"
-                            stroke="currentColor"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="18" y1="6" x2="6" y2="18" />
-                            <line x1="6" y1="6" x2="18" y2="18" />
-                          </svg>
-                        </button>
-
+                      className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600"
+                      onClick={onClose}
+                      aria-label="close modal"
+                      type="button"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-x"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        strokeWidth="2.5"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                      </svg>
+                    </button>
                   </form>
                 </div>
               </div>
