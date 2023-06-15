@@ -22,17 +22,14 @@ function AllList() {
       ...(appointments?.value || []).map((item) => {
         const phone = item.phone.join(" / ");
         const agent = item.posted_by?.firstName;
-        const formattedDate = moment(item.date).format("DD-MM-YY [à] HH:mm");
-        const address = item.address;
-        const commercial = item.commercial;
         return [
           agent,
-          formattedDate,
+          moment( item.createdAt).format("DD-MM-YY HH:mm"),
           item.name,
           phone,
-          address,
-          formattedDate,
-          commercial,
+          item.address,
+          moment( item.date).format("DD-MM-YY HH:mm"),
+          item.commercial,
         ].join(",");
       }),
     ].join("\n");
