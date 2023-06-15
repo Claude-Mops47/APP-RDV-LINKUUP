@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { appointmentActions } from "_store";
 import { Link } from "react-router-dom";
@@ -14,6 +14,7 @@ function AllList() {
   }, [dispatch]);
 
   //   function download
+  const downloadRef = useRef(null);
 
   const downloadAsCSV = () => {
     const csvContent = [
@@ -55,7 +56,7 @@ function AllList() {
   const [filterAgent, setFilterAgent] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedDate, setSelectedDate] = useState("");
-  const [appointmentsPerPage, setAppointmentsPerPage] = useState(15);
+  const [appointmentsPerPage, setAppointmentsPerPage] = useState(20);
 
   const handleSelectChange = (e) => {
     const selectedValue = parseInt(e.target.value);
@@ -193,6 +194,18 @@ function AllList() {
                 className="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
               />
             </div>
+            <div className="block relative ml-4">
+              <button
+                              ref={downloadRef}
+
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                // onClick={downloadAsCSV}
+
+              >
+                download ss CSV
+              </button>
+            </div>
+           
           </div>
 
           {/* <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto"> */}
@@ -340,7 +353,7 @@ function AllList() {
                   </div>
                 </div>
               )}
- 
+
               {/* </div> */}
               <div className="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
                 <Pagination
