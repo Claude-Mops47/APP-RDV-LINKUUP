@@ -206,7 +206,7 @@ function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [refreshList, setRefreshList] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [appointmentsPerPage] = useState(10); // Nombre d'éléments par page
+  const [appointmentsPerPage] = useState(15); // Nombre d'éléments par page
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.value.user);
   const appointments = useSelector((state) => state.appointments.item);
@@ -261,7 +261,7 @@ function Home() {
     return currentAppointments.map((item, index) => {
       const formattedDate = moment(item?.date).format("DD-MM-YY [à] HH:mm");
       const formattedDateCreated = moment(item?.createdAt).format(
-        "DD-MM [à] HH:mm"
+        "DD-MMMM [à] HH:mm"
       );
 
       return (
@@ -401,7 +401,10 @@ function Home() {
             </div>
           </div>
           {/* Pagination */}
+
+
           <div className="flex justify-center my-4">
+          {/* <div className="inline-flex mt-2 xs:mt-0"> */}
             <nav className="block">
               <ul className="flex pl-0 rounded list-none flex-wrap">
                 {Array.from({ length: totalPages }, (_, index) => (
@@ -421,7 +424,8 @@ function Home() {
               </ul>
             </nav>
           </div>
-        </div>
+          </div>
+
       </div>
     </>
   );
