@@ -7,11 +7,11 @@ import {
 } from "react-router-dom";
 
 import { history } from "_helpers";
-import { Nav, Alert, PrivateRoute } from "_components";
+import { Nav, Alert, PrivateRoute, Footer } from "_components";
 import { Home } from "home";
 import { AccountLayout } from "account";
 import { UsersLayout } from "users";
-import {  Edit } from "_appointments";
+import { Edit } from "_appointments";
 import { Admin } from "admin";
 import { useSelector } from "react-redux";
 
@@ -30,12 +30,11 @@ function App() {
   const userRole = isAuthenticated ? auth.value.user.role : "";
 
   return (
-    // <div className="app-container bg-light">
-    <div className="">
+    <div className="flex flex-col min-h-screen bg-gray-500">
       <Nav />
       <Alert />
-      {/* <div className="container pt-4 pb-8"> */}
-      <div className="">
+      {/* bg-gray-400 */}
+      <div className="flex-grow mt-20">
         <Routes>
           {/* private */}
           <Route element={<PrivateRoute />}>
@@ -52,6 +51,8 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </div>
+
+      <Footer className="mt-auto" />
     </div>
   );
 }
