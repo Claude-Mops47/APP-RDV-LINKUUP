@@ -196,16 +196,14 @@ function AllList() {
             </div>
             <div className="block relative ml-4">
               <button
-                              ref={downloadRef}
-
+              type="button"
+                ref={downloadRef}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                // onClick={downloadAsCSV}
-
+                onClick={downloadAsCSV}
               >
-                download ss CSV
+                download as CSV
               </button>
             </div>
-           
           </div>
 
           {/* <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto"> */}
