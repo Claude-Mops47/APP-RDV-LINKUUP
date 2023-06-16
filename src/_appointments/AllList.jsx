@@ -343,7 +343,7 @@ function AllList() {
               {appointments?.error && (
                 <div>
                   <div className="center">
-                    <p style={{ color: "red" }}>Error Network</p>{" "}
+                    <p className="text-red-500">Error Network</p>{" "}
                   </div>
                 </div>
               )}
@@ -391,9 +391,12 @@ function Pagination({
       {pageNumbers.map((number) => (
         <button
           key={number}
-          className={`text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 ${
-            number === currentPage ? "active" : ""
+          className={`relative block py-2 px-3 leading-tight bg-white border border-gray-300 text-gray-500 hover:text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 focus:shadow-outline-blue active:bg-gray-300 active:text-gray-800 transition duration-150 ease-in-out${
+            number === currentPage ? "z-10 bg-indigo-500 text-white" : ""
           }`}
+          // className={`text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 ${
+          //   number === currentPage ? "active" : ""
+          // }`}
           onClick={() => paginate(number)}
         >
           {number}

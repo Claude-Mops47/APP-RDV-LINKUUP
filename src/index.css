@@ -1,19 +1,19 @@
 
 /* modal */
-/* 
+
 .modal {
   display: flex;
   align-items: center;
   justify-content: center;
-} */
+} 
 
 
-/* 
+
 .modal.open {
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+} 
 
 
 /* Ajoutez ces styles à votre feuille de style CSS */
