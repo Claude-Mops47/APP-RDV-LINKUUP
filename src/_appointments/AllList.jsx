@@ -19,16 +19,16 @@ function AllList() {
   const downloadAsCSV = () => {
     const csvContent = [
       "Agent,Date,Name,Telephone,Address,Date programmation,Commercial",
-      ...(appointments?.value || []).map((item) => {
+      ...(sortedAppointments || []).map((item) => {
         const phone = item.phone.join(" / ");
         const agent = item.posted_by?.firstName;
         return [
           agent,
-          moment( item.createdAt).format("DD-MM-YY HH:mm"),
+          moment(item.createdAt).format("DD-MM-YY HH:mm"),
           item.name,
           phone,
           item.address,
-          moment( item.date).format("DD-MM-YY HH:mm"),
+          moment(item.date).format("DD-MM-YY HH:mm"),
           item.commercial,
         ].join(",");
       }),
@@ -108,7 +108,6 @@ function AllList() {
     indexOfFirstAppointment,
     indexOfLastAppointment
   );
-
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
     setSelectedDate("");
@@ -193,7 +192,7 @@ function AllList() {
             </div>
             <div className="block relative ml-4">
               <button
-              type="button"
+                type="button"
                 ref={downloadRef}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 onClick={downloadAsCSV}
@@ -284,14 +283,14 @@ function AllList() {
                         </td>
 
                         <td className="px-3 py-3 border-b border-gray-200 bg-white ">
-                          <div
+                          <p
                             className="text-gray-900 text-xs sm:px-6  whitespace-no-wrap overflow-auto"
                             style={{
                               maxWidth: "120px",
                             }}
                           >
                             {item.address.toLowerCase()}
-                          </div>
+                          </p>
                         </td>
 
                         <td className="px-3 py-3 border-b border-gray-200 bg-white">
