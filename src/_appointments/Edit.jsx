@@ -268,9 +268,8 @@ export function Edit() {
                 <p>Please fill out all the fields.</p>
               </div>
               {!appointments?.loading && !appointments?.error && (
-                <form onSubmit={formik.handleSubmit}  className="lg:col-span-2">
+                <form onSubmit={formik.handleSubmit} className="lg:col-span-2">
                   <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-
                     <div className="md:col-span-2">
                       <label htmlFor="date">Date</label>
                       <div className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
@@ -340,7 +339,7 @@ export function Edit() {
                         <div className="text-red-500">{formik.errors.name}</div>
                       )}
                     </div>
-{/* 
+                    {/* 
                     <div className="md:col-span-5">
                       <label for="email">Email Address</label>
                       <input
@@ -461,13 +460,19 @@ export function Edit() {
                 </form>
               )}
               {appointments?.loading && (
-                <div className="text-center m-5">
-                  <span className="spinner-border spinner-border-lg align-center"></span>
+                <div className="h-screen bg-white">
+                  <div className="flex justify-center items-center h-full">
+                    <img
+                      className="h-16 w-16"
+                      src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif"
+                      alt=""
+                    />
+                  </div>
                 </div>
               )}
               {appointments?.error && (
-                <div className="text-center m-5">
-                  <div className="text-danger">
+                <div className="h-screen bg-white">
+                  <div className="text-red-500">
                     Error loading appointment: {appointments.error}
                   </div>
                 </div>
