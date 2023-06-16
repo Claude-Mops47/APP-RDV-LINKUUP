@@ -194,7 +194,6 @@
 
 // export { Home };
 
-
 import { useDispatch, useSelector } from "react-redux";
 import ModalForm from "_components/PopupForm";
 import React, { useEffect, useState } from "react";
@@ -252,16 +251,17 @@ function Home() {
 
     // Pagination
     const indexOfLastAppointment = currentPage * appointmentsPerPage;
-    const indexOfFirstAppointment = indexOfLastAppointment - appointmentsPerPage;
+    const indexOfFirstAppointment =
+      indexOfLastAppointment - appointmentsPerPage;
     const currentAppointments = sortedAppointments.slice(
       indexOfFirstAppointment,
       indexOfLastAppointment
     );
 
     return currentAppointments.map((item, index) => {
-      const formattedDate = moment(item?.date).format("DD-MM-YY [à] HH:mm");
+      const formattedDate = moment(item?.date).format("DD-MM-YY, HH:mm");
       const formattedDateCreated = moment(item?.createdAt).format(
-        "DD-MMMM [à] HH:mm"
+        "DD-MMMM, HH:mm"
       );
 
       return (
@@ -289,14 +289,14 @@ function Home() {
           </td>
 
           <td className="px-3 py-3 border-b border-gray-300 bg-white ">
-            <div
+            <p
               className="text-gray-900 text-xs sm:px-6 h-8 whitespace-no-wrap overflow-auto"
               style={{
-                maxWidth: "110px",
+                maxWidth: "120px",
               }}
             >
               {item.address?.toLowerCase()}
-            </div>
+            </p>
           </td>
 
           <td className="px-3 py-3 border-b border-gray-300 bg-white">
@@ -402,9 +402,8 @@ function Home() {
           </div>
           {/* Pagination */}
 
-
           <div className="flex justify-center my-4">
-          {/* <div className="inline-flex mt-2 xs:mt-0"> */}
+            {/* <div className="inline-flex mt-2 xs:mt-0"> */}
             <nav className="block">
               <ul className="flex pl-0 rounded list-none flex-wrap">
                 {Array.from({ length: totalPages }, (_, index) => (
@@ -424,8 +423,7 @@ function Home() {
               </ul>
             </nav>
           </div>
-          </div>
-
+        </div>
       </div>
     </>
   );

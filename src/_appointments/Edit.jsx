@@ -107,218 +107,375 @@ export function Edit() {
   }
 
   return (
-    <>
-      <h2>Edit Appointment</h2>
-      {!appointments?.loading && !appointments?.error && (
-        <>
-          <form onSubmit={formik.handleSubmit}>
-            <div className="row">
-              <div className="mb-3 col">
-                <label htmlFor="date">Scheduling Date:</label>
+    // <>
+    //   <h2 className="text-2xl font-bold mb-4">Edit Appointment</h2>
+    //   {!appointments?.loading && !appointments?.error && (
+    //     <>
+    //       <form onSubmit={formik.handleSubmit} className='edit-appointment-form'>
+    //         <div className="grid grid-cols-2 gap-4">
+    //           <div className="mb-3">
+    //             <label htmlFor="date" className="block font-semibold">Scheduling Date</label>
 
-                <DatePicker
-                  id="date"
-                  name="date"
-                  selected={date}
-                  onChange={handleDateChange}
-                  onBlur={handleBlur}
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  dateFormat="yyyy-MM-dd HH:mm"
-                  className="form-control"
-                />
+    //             <DatePicker
+    //               id="date"
+    //               name="date"
+    //               selected={date}
+    //               onChange={handleDateChange}
+    //               onBlur={handleBlur}
+    //               showTimeSelect
+    //               timeFormat="HH:mm"
+    //               dateFormat="yyyy-MM-dd HH:mm"
+    //               className="w-full px-4 py-2 border boerder-gay-300 rounded-md focus:ring-2 focus:ring-blue-500"
+    //             />
 
-                {formik.errors.date && formik.touched.date && (
-                  <div className="error"> {formik.errors.date}</div>
-                )}
+    //             {formik.errors.date && formik.touched.date && (
+    //               <div className="text-red-500"> {formik.errors.date}</div>
+    //             )}
+    //           </div>
+
+    //           <div className="mb-3">
+    //             <label htmlFor="name" className="block font-semibold">Full Name:</label>
+    //             <input
+    //               id="name"
+    //               name="name"
+    //               type="text"
+    //               onChange={handleChange}
+    //               onBlur={handleBlur}
+    //               value={formik.values.name}
+    //               className="w-full px-4 py-2 border boerder-gay-300 rounded-md focus:ring-2 focus:ring-blue-500"
+    //               autoComplete="off"
+    //             />
+    //             {formik.errors.name && formik.touched.name && (
+    //               <div className="text-red-500">{formik.errors.name}</div>
+    //             )}
+    //           </div>
+    //         </div>
+
+    //         <div className="grid grid-cols-2 gap-4">
+    //           <div className="mb-3">
+    //             <label htmlFor="phone" className="block mb-1 ">Phone:</label>
+    //             <input
+    //               id="phone"
+    //               name="phone"
+    //               type="text"
+    //               onChange={handleChange}
+    //               onBlur={handleBlur}
+    //               value={formik.values.phone}
+    //               className="w-full px-4 py-2 border boerder-gay-300 rounded-md focus:ring-2 focus:ring-blue-500"
+    //               autoComplete="off"
+    //               placeholder="Fixe / Mobile"
+    //             />
+    //             {formik.errors.phone && formik.touched.phone && (
+    //               <div className="text-red-500">{formik.errors.phone}</div>
+    //             )}
+    //           </div>
+
+    //           <div className="mb-3">
+    //             <label htmlFor="commercial" className="block mb-1">Sales Representative:</label>
+    //             <select
+    //               id="commercial"
+    //               name="commercial"
+    //               type="text"
+    //               onChange={handleChange}
+    //               onBlur={handleBlur}
+    //               value={formik.values.commercial}
+    //               className="w-full px-4 py-2 border boerder-gay-300 rounded-md focus:ring-2 focus:ring-blue-500"
+    //               autoComplete="off"
+    //             >
+    //               <option value="">Select Sales Representative</option>
+    //               <option value="Annabelle Rodriguez">
+    //                 Annabelle Rodriguez
+    //               </option>
+    //               <option value="Benoît Chamboissier">
+    //                 Benoît Chamboissier
+    //               </option>
+    //               <option value="Freddy Tamboers">Freddy Tamboers</option>
+    //               <option value="Julien Morel">Julien Morel</option>
+    //               <option value="Théo Raymond">Théo Raymond</option>
+    //               <option value="Aurore Diallo">Aurore Diallo</option>
+    //               <option value="Simon Cadenne">Simon Cadenne</option>
+    //             </select>
+    //             {formik.errors.commercial && formik.touched.commercial && (
+    //               <div className="text-red-500">{formik.errors.commercial}</div>
+    //             )}
+    //           </div>
+    //         </div>
+
+    //         <div className="mb-3">
+    //           <label htmlFor="address" className="block mb-1">Address:</label>
+    //           <textarea
+    //             id="address"
+    //             name="address"
+    //             type="text"
+    //             onChange={handleChange}
+    //             onBlur={handleBlur}
+    //             value={formik.values.address}
+    //             className="w-full px-4 py-2 border boerder-gay-300 rounded-md focus:ring-2 focus:ring-blue-500"
+    //             autoComplete="off"
+    //           />
+    //           {formik.errors.address && formik.touched.address && (
+    //             <div className="text-red-500">{formik.errors.address}</div>
+    //           )}
+    //         </div>
+
+    //         <div className="mb-3">
+    //           <label htmlFor="status" className="block mb-1">Status:</label>
+    //           <select
+    //             id="status"
+    //             name="status"
+    //             type="text"
+    //             onChange={handleChange}
+    //             onBlur={handleBlur}
+    //             value={formik.values.status}
+    //             className="w-full px-4 py-2 border boerder-gay-300 rounded-md focus:ring-2 focus:ring-blue-500"
+    //             autoComplete="off"
+    //           >
+    //             <option value="">Select Status</option>
+    //             <option value="Confirmé">Confirmé</option>
+    //             <option value="En Attente">En Attente</option>
+    //             <option value="Annulé">Annulé</option>
+    //             <option value="Pas Intéressé">Pas Intéressé</option>
+    //             <option value="A Rappeler">A Rappeler</option>
+    //             <option value="Date Eloignée">Date Eloignée</option>
+    //           </select>
+    //           {formik.errors.status && formik.touched.status && (
+    //             <div className="text-red-500">{formik.errors.status}</div>
+    //           )}
+    //         </div>
+
+    //       </form>
+
+    //
+    //     </>
+    //   )}
+
+    // </>
+
+    <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+      <div className="container max-w-screen-lg mx-auto">
+        <div>
+          <h2 className="font-semibold text-xl text-gray-600">
+            Edit Appointment
+          </h2>
+          <p className="text-gray-500 mb-6">
+            Form is mobile responsive. Give it a try.
+          </p>
+
+          <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+            <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+              <div className="text-gray-600">
+                <p className="font-medium text-lg">Appointment Details</p>
+                <p>Please fill out all the fields.</p>
               </div>
+              {!appointments?.loading && !appointments?.error && (
+                <form onSubmit={formik.handleSubmit}  className="lg:col-span-2">
+                  <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
 
-              <div className="mb-3 col">
-                <label htmlFor="name">Full Name:</label>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={formik.values.name}
-                  className="form-control"
-                  autoComplete="off"
-                />
-                {formik.errors.name && formik.touched.name && (
-                  <div className="error">{formik.errors.name}</div>
-                )}
-              </div>
-            </div>
+                    <div className="md:col-span-2">
+                      <label htmlFor="date">Date</label>
+                      <div className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                        <DatePicker
+                          id="date"
+                          name="date"
+                          selected={date}
+                          onChange={handleDateChange}
+                          onBlur={handleBlur}
+                          showTimeSelect
+                          showIcon
+                          timeFormat="HH:mm"
+                          dateFormat="yyyy-MM-dd HH:mm"
+                          class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                        />
 
-            <div className="row">
-              <div className="mb-3 col">
-                <label htmlFor="phone">Phone:</label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={formik.values.phone}
-                  className="form-control"
-                  autoComplete="off"
-                  placeholder="Fixe / Mobile"
-                />
-                {formik.errors.phone && formik.touched.phone && (
-                  <div className="error">{formik.errors.phone}</div>
-                )}
-              </div>
+                        {formik.errors.date && formik.touched.date && (
+                          <div className="text-red-500">
+                            {" "}
+                            {formik.errors.date}
+                          </div>
+                        )}
+                      </div>
+                    </div>
 
-              <div className="mb-3 col">
-                <label htmlFor="commercial">Sales Representative:</label>
-                <select
-                  id="commercial"
-                  name="commercial"
-                  type="text"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={formik.values.commercial}
-                  className="form-control"
-                  autoComplete="off"
-                >
-                  <option value="">Select Sales Representative</option>
-                  <option value="Annabelle Rodriguez">
-                    Annabelle Rodriguez
-                  </option>
-                  <option value="Benoît Chamboissier">
-                    Benoît Chamboissier
-                  </option>
-                  <option value="Freddy Tamboers">Freddy Tamboers</option>
-                  <option value="Julien Morel">Julien Morel</option>
-                  <option value="Théo Raymond">Théo Raymond</option>
-                  <option value="Aurore Diaollo">Aurore Diaollo</option>
-                  <option value="Simon Cadenne">Simon Cadenne</option>
-                </select>
-                {formik.errors.commercial && formik.touched.commercial && (
-                  <div className="error">{formik.errors.commercial}</div>
-                )}
-              </div>
-            </div>
+                    <div className="md:col-span-2">
+                      <label htmlFor="status">Status</label>
+                      <div className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                        <select
+                          name="status"
+                          id="status"
+                          placeholder="Status"
+                          className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={formik.values.status}
+                        >
+                          <option value="">Select Status</option>
+                          <option value="Confirmé">Confirmé</option>
+                          <option value="En Attente">En Attente</option>
+                          <option value="Annulé">Annulé</option>
+                          <option value="Pas Intéressé">Pas Intéressé</option>
+                          <option value="A Rappeler">A Rappeler</option>
+                          <option value="Date Eloignée">Date Eloignée</option>
+                        </select>
+                      </div>
+                      {formik.errors.status && formik.touched.status && (
+                        <div className="text-red-500">
+                          {formik.errors.status}
+                        </div>
+                      )}
+                    </div>
 
-            <div>
-              <label htmlFor="address">Address:</label>
-              <input
-                id="address"
-                name="address"
-                type="text"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={formik.values.address}
-                className="form-control"
-                autoComplete="off"
-              />
-              {formik.errors.address && formik.touched.address && (
-                <div className="error">{formik.errors.address}</div>
+                    <div className="md:col-span-5">
+                      <label htmlFor="name">Full Name</label>
+                      <input
+                        type="text"
+                        name="name"
+                        id="name"
+                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        value={formik.values.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        autoComplete="off"
+                      />
+                      {formik.errors.name && formik.touched.name && (
+                        <div className="text-red-500">{formik.errors.name}</div>
+                      )}
+                    </div>
+{/* 
+                    <div className="md:col-span-5">
+                      <label for="email">Email Address</label>
+                      <input
+                        type="text"
+                        name="email"
+                        id="email"
+                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        value=""
+                        placeholder="email@domain.com"
+                      />
+                    </div> */}
+
+                    <div className="md:col-span-3">
+                      <label htmlFor="address">Address / Street</label>
+                      <input
+                        type="text"
+                        name="address"
+                        id="address"
+                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={formik.values.address}
+                        autoComplete="off"
+                      />
+
+                      {formik.errors.address && formik.touched.address && (
+                        <div className="text-red-500">
+                          {formik.errors.address}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="md:col-span-2">
+                      <label htmlFor="phone">Phone</label>
+                      <input
+                        type="text"
+                        name="phone"
+                        id="phone"
+                        className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                        value={formik.values.phone}
+                        placeholder="fixe / mobile"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        autoComplete="off"
+                      />
+                      {formik.errors.phone && formik.touched.phone && (
+                        <div className="text-red-500">
+                          {formik.errors.phone}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="md:col-span-5 text-right">
+                      <div className="inline-flex items-end">
+                        <button
+                          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mx-2"
+                          type="button"
+                          onClick={() => {
+                            confirmAlert({
+                              title: "Confirm update",
+                              message:
+                                "Are you sure you want to update this appointment?",
+                              buttons: [
+                                {
+                                  label: "Yes",
+                                  onClick: () => formik.submitForm(),
+                                },
+                                {
+                                  label: "No",
+                                  onClick: () => {},
+                                },
+                              ],
+                            });
+                          }}
+                        >
+                          Update
+                        </button>
+
+                        <button
+                          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-2"
+                          type="button"
+                          onClick={() => {
+                            confirmAlert({
+                              title: "Confirm deletion",
+                              message:
+                                "Are you sure you want to delete this appointment?",
+                              buttons: [
+                                {
+                                  label: "Yes",
+                                  onClick: () => {
+                                    dispatch(
+                                      appointmentActions.deleteAppointment(id)
+                                    );
+                                    history.navigate("/admin");
+                                  },
+                                },
+                                {
+                                  label: "No",
+                                  onClick: () => {},
+                                },
+                              ],
+                            });
+                          }}
+                        >
+                          Delete
+                        </button>
+
+                        <button
+                          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mx-2"
+                          type="button"
+                          onClick={handleCancel}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              )}
+              {appointments?.loading && (
+                <div className="text-center m-5">
+                  <span className="spinner-border spinner-border-lg align-center"></span>
+                </div>
+              )}
+              {appointments?.error && (
+                <div className="text-center m-5">
+                  <div className="text-danger">
+                    Error loading appointment: {appointments.error}
+                  </div>
+                </div>
               )}
             </div>
-
-            <div>
-              <label htmlFor="status">Status:</label>
-              <select
-                id="status"
-                name="status"
-                type="text"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={formik.values.status}
-                className="form-control"
-                autoComplete="off"
-              >
-                <option value="">Select Status</option>
-                <option value="Confirmé">Confirmé</option>
-                <option value="En Attente">En Attente</option>
-                <option value="Annulé">Annulé</option>
-                <option value="Pas Intéressé">Pas Intéressé</option>
-                <option value="A Rappeler">A Rappeler</option>
-                <option value="Date Eloignée">Date Eloignée</option>
-              </select>
-              {formik.errors.status && formik.touched.status && (
-                <div className="error">{formik.errors.status}</div>
-              )}
-            </div>
-
-            <br />
-          </form>
-
-          <div className="modal-footer">
-            <button
-              type="button"
-              onClick={() => {
-                confirmAlert({
-                  title: "Confirm update",
-                  message: "Are you sure you want to update this appointment?",
-                  buttons: [
-                    {
-                      label: "Yes",
-                      onClick: () => formik.submitForm(),
-                    },
-                    {
-                      label: "No",
-                      onClick: () => {},
-                    },
-                  ],
-                });
-              }}
-              className="btn btn-sm btn-outline-success me-1"
-            >
-              Update
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                confirmAlert({
-                  title: "Confirm deletion",
-                  message: "Are you sure you want to delete this appointment?",
-                  buttons: [
-                    {
-                      label: "Yes",
-                      onClick: () => {
-                        dispatch(appointmentActions.deleteAppointment(id));
-                        history.navigate("/admin");
-                      },
-                    },
-                    {
-                      label: "No",
-                      onClick: () => {},
-                    },
-                  ],
-                });
-              }}
-              className="btn btn-sm btn-outline-danger me-1"
-            >
-              Delete
-            </button>
-
-            <button
-              type="button"
-              // className="btn btn-outline-secondary"
-              className="btn btn-sm btn-outline-secondary me-1"
-              onClick={handleCancel}
-            >
-              Cancel
-            </button>
-          </div>
-        </>
-      )}
-      {appointments?.loading && (
-        <div className="text-center m-5">
-          <span className="spinner-border spinner-border-lg align-center"></span>
-        </div>
-      )}
-      {appointments?.error && (
-        <div className="text-center m-5">
-          <div className="text-danger">
-            Error loading appointment: {appointments.error}
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 }
