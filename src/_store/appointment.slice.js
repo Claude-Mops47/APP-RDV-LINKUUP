@@ -13,7 +13,7 @@ export const appointmentsReducer = slice.reducer;
 
 function createInitialState() {
   return {
-    // list: null,
+    list: null,
     item: null,
     deletedAppointment: null,
     updatedAppointment: null,

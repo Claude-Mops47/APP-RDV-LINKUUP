@@ -64,7 +64,7 @@ function createExtraActions() {
           // set auth user in redux state
           dispatch(authActions.setAuth(user));
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem("auth", JSON.stringify(user.user));
+          localStorage.setItem("auth", JSON.stringify(user));
                 // store user details and jwt token in cookie to keep user logged in between page refreshes
           Cookies.set('auth', user.token, { secure: true, sameSite: 'strict' });
           // get return url from location state or default to home page
