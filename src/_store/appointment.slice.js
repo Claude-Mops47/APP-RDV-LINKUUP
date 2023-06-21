@@ -13,7 +13,7 @@ export const appointmentsReducer = slice.reducer;
 
 function createInitialState() {
   return {
-    list: null,
+    // list: null,
     item: null,
     deletedAppointment: null,
     updatedAppointment: null,
@@ -55,7 +55,8 @@ function createExtraActions() {
               const response = await fetchWrapper.get(`${baseUrl}`);
               resolve(response);
             } catch (error) {
-              reject(error);
+              console.log(error);
+              reject("Une erreur s'est produite lors de la récupération des rendez-vous. Veuillez réessayer plus tard.");
             }
           }, 500);
         });

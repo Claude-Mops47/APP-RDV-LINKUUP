@@ -271,7 +271,6 @@ const Home = () => {
   const dispatch = useDispatch();
   const authUser = useSelector((state) => state.auth.value.user);
   const appointments = useSelector((state) => state.appointments.item);
-
   useEffect(() => {
     dispatch(appointmentActions.getAppointmentByUser(authUser?.id));
     setRefreshList(false);

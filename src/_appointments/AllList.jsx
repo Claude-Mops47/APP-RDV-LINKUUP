@@ -207,7 +207,7 @@ function AllList() {
             <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
               {/* <div className="overflow-x-auto"> */}
 
-              <table className="min-w-full leading-normal ">
+              <table className="min-w-full  table-auto leading-normal ">
                 <thead>
                   <tr>
                     <th className="px-2 py-2 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -329,6 +329,10 @@ function AllList() {
                   })}
                 </tbody>
               </table>
+
+
+              </div>
+            </div>
               {appointments?.loading && (
                 <div className="h-screen bg-white">
                   <div className="flex justify-center items-center h-full">
@@ -356,8 +360,6 @@ function AllList() {
                   currentPage={currentPage}
                   paginate={paginate}
                 />
-              </div>
-            </div>
           </div>
         </div>
       </div>
